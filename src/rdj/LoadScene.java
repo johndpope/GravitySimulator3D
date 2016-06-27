@@ -161,7 +161,7 @@ public class LoadScene extends SuperScene
     private static ScriptEngineManager factory;
     private static ScriptEngine scriptEngine;
         
-    public LoadScene(SpaceNavigator sn, Path scenefile) throws Exception
+    public LoadScene(MainStage sn, Path scenefile) throws Exception
     {
 	lsVerbosity = 0;
 	super.spacenavigator = sn;

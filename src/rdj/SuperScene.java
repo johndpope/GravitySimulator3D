@@ -105,7 +105,7 @@ public class SuperScene
     protected	Label		    sceneTitleLabel, sceneIdLabel, switchMotionLabel, switchGravityLabel, restoreCoordinalLabel, nodesTitleLabel;
     protected	TitledPane	    titledPane;
     protected	VBox		    sceneDisplayActionVBox;
-    protected	SpaceNavigator	    spacenavigator;
+    protected	MainStage	    spacenavigator;
     protected   VBox		    sceneSectionVBox, sceneListVBox, sceneFunctionsVBox, nodeSectionVBox, nodeListVBox;//, navSectionVBox, navButtonVBox;
     private	RotateTransition    flipSceneSectionToFrontTransition1, flipSceneSectionToFrontTransition2, flipSceneSectionToBackTransition1, flipSceneSectionToBackTransition2;
     private	RotateTransition    flipNodeSectionToFrontTransition1, flipNodeSectionToFrontTransition2, flipNodeSectionToBackTransition1, flipNodeSectionToBackTransition2;
@@ -202,7 +202,7 @@ public class SuperScene
 	sceneReloadRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> 
 	{
 	    spacenavigator.getSceneDisplayController().disableMouseMovement();
-	    spacenavigator.switch2LoadScene(SpaceNavigator.scenefile);
+	    spacenavigator.switch2LoadScene(MainStage.scenefile);
 	});
 	sceneReloadRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { sceneReloadRect.setFill(Color.rgb(0,0,0,0.0)); });
 	sceneFunctionsVBox.getChildren().add(sceneReloadHBox);

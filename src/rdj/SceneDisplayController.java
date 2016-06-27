@@ -78,7 +78,7 @@ public	class SceneDisplayController extends Group implements Initializable // Ge
 	    
     @FXML	private		Group		    rootGroup;
 
-    private	SpaceNavigator	    spacenavigator;
+    private	MainStage	    spacenavigator;
     private	String		    precision;
     protected	Rectangle2D	    rectangle2D;
     protected	double		    screenwidth, screenheight;
@@ -111,7 +111,7 @@ public	class SceneDisplayController extends Group implements Initializable // Ge
 //	System.out.println("initialize method");
     }
 
-    public void setApp(SpaceNavigator param) // no default constructor, use this to set a caller reference and the rest
+    public void setApp(MainStage param) // no default constructor, use this to set a caller reference and the rest
     {
 //	System.out.println("setApp");
 	spacenavigator = param;

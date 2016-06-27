@@ -33,7 +33,7 @@ public class ImportModel // extends Application
     private Group	group;
     private String	output;
     
-    public ImportModel(SpaceNavigator sn, String filename, String meshNodeFilter, int verbose)
+    public ImportModel(MainStage sn, String filename, String meshNodeFilter, int verbose)
     {
 	group = new Group();
 	String extension = "";
@@ -46,7 +46,7 @@ public class ImportModel // extends Application
 	
     }
     
-    private void importColladaDAE(SpaceNavigator sn, String filename, String meshNodeFilter, int verbosity)
+    private void importColladaDAE(MainStage sn, String filename, String meshNodeFilter, int verbosity)
     {
         URL url; url = getClass().getResource(filename);
 	if (2<=verbosity) { if (sn != null) { sn.notifyPreloader(new ErrorNotification("info","importColladaDAE",new Throwable(" Loading file: " + filename + "..."))); } }
@@ -112,7 +112,7 @@ public class ImportModel // extends Application
 	}
     }
     
-    private void importWavefrontObject(SpaceNavigator sn, String filename, String meshNodeFilter, int verbosity)
+    private void importWavefrontObject(MainStage sn, String filename, String meshNodeFilter, int verbosity)
     {
         URL url; url = getClass().getResource(filename);
 	if (2<=verbosity) { if (sn != null) { sn.notifyPreloader(new ErrorNotification("info","ImportWavefrontObject",new Throwable(" Loading file: " + filename + "..."))); }}
@@ -160,7 +160,7 @@ public class ImportModel // extends Application
 	}
     }
     
-    private void importSTL(SpaceNavigator sn, String filename, String meshNodeFilter, int verbosity)
+    private void importSTL(MainStage sn, String filename, String meshNodeFilter, int verbosity)
     {
         URL url; url = getClass().getResource(filename);
 	if (2<=verbosity) { if (sn != null) { sn.notifyPreloader(new ErrorNotification("info","ImportSTL",new Throwable(" Loading file: " + filename + "..."))); }}
