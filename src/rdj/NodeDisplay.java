@@ -70,7 +70,7 @@ public class NodeDisplay
     private boolean showing = true;
     EventHandler<MouseEvent> mouseClickedHandler;
 
-    public NodeDisplay(SuperScene superscene, boolean show) // Gets shown in SpaceNavigator.setStageScene
+    public NodeDisplay(SuperScene superscene, boolean show) // Gets shown in GravitySimulator3D.setStageScene
     {
 	this.superscene = superscene;
 
@@ -483,138 +483,138 @@ public class NodeDisplay
     private void createCelestialEvents()
     {
 	massLabel.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { if (mouseEvent.getClickCount() == 1)
-	{ superscene.spacenavigator.setEditing(true); massTField.setText(Double.toString(superscene.node3d.getCelestial().getMass())); massLabel.setVisible(false); massTField.setVisible(true); } });
+	{ superscene.mainstage.setEditing(true); massTField.setText(Double.toString(superscene.node3d.getCelestial().getMass())); massLabel.setVisible(false); massTField.setVisible(true); } });
 	massTField.addEventFilter(KeyEvent.KEY_PRESSED, (EventHandler<KeyEvent>) (KeyEvent keyEvent) -> { if (keyEvent.getCode() == KeyCode.ENTER)
-	{ superscene.node3d.getCelestial().setMass(Double.parseDouble(massTField.getText())); massTField.setVisible(false); massLabel.setVisible(true); superscene.spacenavigator.setEditing(false); restoreCoordinals(); }
-	else if (keyEvent.getCode() == KeyCode.ESCAPE) { massTField.setVisible(false); massLabel.setVisible(true); superscene.spacenavigator.setEditing(false); } });
+	{ superscene.node3d.getCelestial().setMass(Double.parseDouble(massTField.getText())); massTField.setVisible(false); massLabel.setVisible(true); superscene.mainstage.setEditing(false); restoreCoordinals(); }
+	else if (keyEvent.getCode() == KeyCode.ESCAPE) { massTField.setVisible(false); massLabel.setVisible(true); superscene.mainstage.setEditing(false); } });
 
 	radiusLabel.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { if (mouseEvent.getClickCount() == 1)
-	{ superscene.spacenavigator.setEditing(true); radiusTField.setText(Double.toString(superscene.node3d.getCelestial().getRadius())); radiusLabel.setVisible(false); radiusTField.setVisible(true); } });
+	{ superscene.mainstage.setEditing(true); radiusTField.setText(Double.toString(superscene.node3d.getCelestial().getRadius())); radiusLabel.setVisible(false); radiusTField.setVisible(true); } });
 	radiusTField.addEventFilter(KeyEvent.KEY_PRESSED, (EventHandler<KeyEvent>) (KeyEvent keyEvent) -> { if (keyEvent.getCode() == KeyCode.ENTER)
-	{ superscene.node3d.getCelestial().setRadius(Double.parseDouble(radiusTField.getText())); radiusTField.setVisible(false); radiusLabel.setVisible(true); superscene.spacenavigator.setEditing(false); restoreCoordinals(); }
-	else if (keyEvent.getCode() == KeyCode.ESCAPE) { radiusTField.setVisible(false); radiusLabel.setVisible(true); superscene.spacenavigator.setEditing(false); } });
+	{ superscene.node3d.getCelestial().setRadius(Double.parseDouble(radiusTField.getText())); radiusTField.setVisible(false); radiusLabel.setVisible(true); superscene.mainstage.setEditing(false); restoreCoordinals(); }
+	else if (keyEvent.getCode() == KeyCode.ESCAPE) { radiusTField.setVisible(false); radiusLabel.setVisible(true); superscene.mainstage.setEditing(false); } });
 
 	polarityLabel.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { if (mouseEvent.getClickCount() == 1)
-	{ superscene.spacenavigator.setEditing(true); polarityTField.setText(Double.toString(superscene.node3d.getCelestial().getPolarity())); polarityLabel.setVisible(false); polarityTField.setVisible(true); } });
+	{ superscene.mainstage.setEditing(true); polarityTField.setText(Double.toString(superscene.node3d.getCelestial().getPolarity())); polarityLabel.setVisible(false); polarityTField.setVisible(true); } });
 	polarityTField.addEventFilter(KeyEvent.KEY_PRESSED, (EventHandler<KeyEvent>) (KeyEvent keyEvent) -> { if (keyEvent.getCode() == KeyCode.ENTER)
-	{ superscene.node3d.getCelestial().setPolarity(Integer.parseInt(polarityTField.getText())); polarityTField.setVisible(false); polarityLabel.setVisible(true); superscene.spacenavigator.setEditing(false); restoreCoordinals(); }
-	else if (keyEvent.getCode() == KeyCode.ESCAPE) { polarityTField.setVisible(false); polarityLabel.setVisible(true); superscene.spacenavigator.setEditing(false); } });
+	{ superscene.node3d.getCelestial().setPolarity(Integer.parseInt(polarityTField.getText())); polarityTField.setVisible(false); polarityLabel.setVisible(true); superscene.mainstage.setEditing(false); restoreCoordinals(); }
+	else if (keyEvent.getCode() == KeyCode.ESCAPE) { polarityTField.setVisible(false); polarityLabel.setVisible(true); superscene.mainstage.setEditing(false); } });
     }
     
     private void createScaleEvents()
     {
 	c2Label.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { if (mouseEvent.getClickCount() == 1)
-	{ superscene.spacenavigator.setEditing(true); c2TField.setText(Double.toString(superscene.node3d.getBUPCoordinal().getSxProp().get())); c2Label.setVisible(false); c2TField.setVisible(true); } });
+	{ superscene.mainstage.setEditing(true); c2TField.setText(Double.toString(superscene.node3d.getBUPCoordinal().getSxProp().get())); c2Label.setVisible(false); c2TField.setVisible(true); } });
 	c2TField.addEventFilter(KeyEvent.KEY_PRESSED, (EventHandler<KeyEvent>) (KeyEvent keyEvent) -> { if (keyEvent.getCode() == KeyCode.ENTER)
 	{ superscene.node3d.getBUPCoordinal().getSxProp().set(Double.parseDouble(c2TField.getText())); superscene.node3d.getBUPCoordinal().getSyProp().set(Double.parseDouble(c2TField.getText()));
-	superscene.node3d.getBUPCoordinal().getSzProp().set(Double.parseDouble(c2TField.getText())); superscene.node3d.setScale(); c2TField.setVisible(false); c2Label.setVisible(true); superscene.spacenavigator.setEditing(false);
-	restoreCoordinals(); } else if (keyEvent.getCode() == KeyCode.ESCAPE) { c2TField.setVisible(false); c2Label.setVisible(true); superscene.spacenavigator.setEditing(false); } });
+	superscene.node3d.getBUPCoordinal().getSzProp().set(Double.parseDouble(c2TField.getText())); superscene.node3d.setScale(); c2TField.setVisible(false); c2Label.setVisible(true); superscene.mainstage.setEditing(false);
+	restoreCoordinals(); } else if (keyEvent.getCode() == KeyCode.ESCAPE) { c2TField.setVisible(false); c2Label.setVisible(true); superscene.mainstage.setEditing(false); } });
 		
 	sxLabel.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { if (mouseEvent.getClickCount() == 1)
-	{ superscene.spacenavigator.setEditing(true); sxTField.setText(Double.toString(superscene.node3d.getBUPCoordinal().getSxProp().get())); sxLabel.setVisible(false); sxTField.setVisible(true); } });
+	{ superscene.mainstage.setEditing(true); sxTField.setText(Double.toString(superscene.node3d.getBUPCoordinal().getSxProp().get())); sxLabel.setVisible(false); sxTField.setVisible(true); } });
 	sxTField.addEventFilter(KeyEvent.KEY_PRESSED, (EventHandler<KeyEvent>) (KeyEvent keyEvent) -> { if (keyEvent.getCode() == KeyCode.ENTER)
-	{ superscene.node3d.getBUPCoordinal().getSxProp().set(Double.parseDouble(sxTField.getText())); superscene.node3d.setScaleX(); sxTField.setVisible(false); sxLabel.setVisible(true); superscene.spacenavigator.setEditing(false); restoreCoordinals(); }
-	else if (keyEvent.getCode() == KeyCode.ESCAPE) { sxTField.setVisible(false); sxLabel.setVisible(true); superscene.spacenavigator.setEditing(false); } });
+	{ superscene.node3d.getBUPCoordinal().getSxProp().set(Double.parseDouble(sxTField.getText())); superscene.node3d.setScaleX(); sxTField.setVisible(false); sxLabel.setVisible(true); superscene.mainstage.setEditing(false); restoreCoordinals(); }
+	else if (keyEvent.getCode() == KeyCode.ESCAPE) { sxTField.setVisible(false); sxLabel.setVisible(true); superscene.mainstage.setEditing(false); } });
 
 	syLabel.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { if (mouseEvent.getClickCount() == 1)
-	{ superscene.spacenavigator.setEditing(true); syTField.setText(Double.toString(superscene.node3d.getBUPCoordinal().getSyProp().get())); syLabel.setVisible(false); syTField.setVisible(true); } });
+	{ superscene.mainstage.setEditing(true); syTField.setText(Double.toString(superscene.node3d.getBUPCoordinal().getSyProp().get())); syLabel.setVisible(false); syTField.setVisible(true); } });
 	syTField.addEventFilter(KeyEvent.KEY_PRESSED, (EventHandler<KeyEvent>) (KeyEvent keyEvent) -> { if (keyEvent.getCode() == KeyCode.ENTER)
-	{ superscene.node3d.getBUPCoordinal().getSyProp().set(Double.parseDouble(syTField.getText())); superscene.node3d.setScaleY(); syTField.setVisible(false); syLabel.setVisible(true); superscene.spacenavigator.setEditing(false); restoreCoordinals(); }
-	else if (keyEvent.getCode() == KeyCode.ESCAPE) { syTField.setVisible(false); syLabel.setVisible(true); superscene.spacenavigator.setEditing(false); } });
+	{ superscene.node3d.getBUPCoordinal().getSyProp().set(Double.parseDouble(syTField.getText())); superscene.node3d.setScaleY(); syTField.setVisible(false); syLabel.setVisible(true); superscene.mainstage.setEditing(false); restoreCoordinals(); }
+	else if (keyEvent.getCode() == KeyCode.ESCAPE) { syTField.setVisible(false); syLabel.setVisible(true); superscene.mainstage.setEditing(false); } });
 
 	szLabel.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { if (mouseEvent.getClickCount() == 1)
-	{ superscene.spacenavigator.setEditing(true); szTField.setText(Double.toString(superscene.node3d.getBUPCoordinal().getSzProp().get())); szLabel.setVisible(false); szTField.setVisible(true); } });
+	{ superscene.mainstage.setEditing(true); szTField.setText(Double.toString(superscene.node3d.getBUPCoordinal().getSzProp().get())); szLabel.setVisible(false); szTField.setVisible(true); } });
 	szTField.addEventFilter(KeyEvent.KEY_PRESSED, (EventHandler<KeyEvent>) (KeyEvent keyEvent) -> { if (keyEvent.getCode() == KeyCode.ENTER)
-	{ superscene.node3d.getBUPCoordinal().getSzProp().set(Double.parseDouble(szTField.getText())); superscene.node3d.setScaleZ(); szTField.setVisible(false); szLabel.setVisible(true); superscene.spacenavigator.setEditing(false); restoreCoordinals(); }
-	else if (keyEvent.getCode() == KeyCode.ESCAPE) { szTField.setVisible(false); szLabel.setVisible(true); superscene.spacenavigator.setEditing(false); } });
+	{ superscene.node3d.getBUPCoordinal().getSzProp().set(Double.parseDouble(szTField.getText())); superscene.node3d.setScaleZ(); szTField.setVisible(false); szLabel.setVisible(true); superscene.mainstage.setEditing(false); restoreCoordinals(); }
+	else if (keyEvent.getCode() == KeyCode.ESCAPE) { szTField.setVisible(false); szLabel.setVisible(true); superscene.mainstage.setEditing(false); } });
     }
     
     private void createTranslateMotionEvents()
     {
 	txmLabel.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { if (mouseEvent.getClickCount() == 1)
-	{ superscene.spacenavigator.setEditing(true); txmTField.setText(Double.toString(superscene.node3d.getBUPCoordinal().getTxmProp().get())); txmLabel.setVisible(false); txmTField.setVisible(true); } });
+	{ superscene.mainstage.setEditing(true); txmTField.setText(Double.toString(superscene.node3d.getBUPCoordinal().getTxmProp().get())); txmLabel.setVisible(false); txmTField.setVisible(true); } });
 	txmTField.addEventFilter(KeyEvent.KEY_PRESSED, (EventHandler<KeyEvent>) (KeyEvent keyEvent) -> { if (keyEvent.getCode() == KeyCode.ENTER)
-	{ superscene.node3d.getBUPCoordinal().getTxmProp().set(Double.parseDouble(txmTField.getText())); txmTField.setVisible(false); txmLabel.setVisible(true); superscene.spacenavigator.setEditing(false); restoreCoordinals(); }
-	else if (keyEvent.getCode() == KeyCode.ESCAPE) { txmTField.setVisible(false); txmLabel.setVisible(true); superscene.spacenavigator.setEditing(false); } });
+	{ superscene.node3d.getBUPCoordinal().getTxmProp().set(Double.parseDouble(txmTField.getText())); txmTField.setVisible(false); txmLabel.setVisible(true); superscene.mainstage.setEditing(false); restoreCoordinals(); }
+	else if (keyEvent.getCode() == KeyCode.ESCAPE) { txmTField.setVisible(false); txmLabel.setVisible(true); superscene.mainstage.setEditing(false); } });
 
 	tymLabel.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { if (mouseEvent.getClickCount() == 1)
-	{ superscene.spacenavigator.setEditing(true); tymTField.setText(Double.toString(superscene.node3d.getBUPCoordinal().getTymProp().get())); tymLabel.setVisible(false); tymTField.setVisible(true); } });
+	{ superscene.mainstage.setEditing(true); tymTField.setText(Double.toString(superscene.node3d.getBUPCoordinal().getTymProp().get())); tymLabel.setVisible(false); tymTField.setVisible(true); } });
 	tymTField.addEventFilter(KeyEvent.KEY_PRESSED, (EventHandler<KeyEvent>) (KeyEvent keyEvent) -> { if (keyEvent.getCode() == KeyCode.ENTER)
-	{ superscene.node3d.getBUPCoordinal().getTymProp().set(Double.parseDouble(tymTField.getText())); tymTField.setVisible(false); tymLabel.setVisible(true); superscene.spacenavigator.setEditing(false); restoreCoordinals(); }
-	else if (keyEvent.getCode() == KeyCode.ESCAPE) { tymTField.setVisible(false); tymLabel.setVisible(true); superscene.spacenavigator.setEditing(false); } });
+	{ superscene.node3d.getBUPCoordinal().getTymProp().set(Double.parseDouble(tymTField.getText())); tymTField.setVisible(false); tymLabel.setVisible(true); superscene.mainstage.setEditing(false); restoreCoordinals(); }
+	else if (keyEvent.getCode() == KeyCode.ESCAPE) { tymTField.setVisible(false); tymLabel.setVisible(true); superscene.mainstage.setEditing(false); } });
 	
 	tzmLabel.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { if (mouseEvent.getClickCount() == 1)
-	{ superscene.spacenavigator.setEditing(true); tzmTField.setText(Double.toString(superscene.node3d.getBUPCoordinal().getTzmProp().get())); tzmLabel.setVisible(false); tzmTField.setVisible(true); } });
+	{ superscene.mainstage.setEditing(true); tzmTField.setText(Double.toString(superscene.node3d.getBUPCoordinal().getTzmProp().get())); tzmLabel.setVisible(false); tzmTField.setVisible(true); } });
 	tzmTField.addEventFilter(KeyEvent.KEY_PRESSED, (EventHandler<KeyEvent>) (KeyEvent keyEvent) -> { if (keyEvent.getCode() == KeyCode.ENTER)
-	{ superscene.node3d.getBUPCoordinal().getTzmProp().set(Double.parseDouble(tzmTField.getText())); tzmTField.setVisible(false); tzmLabel.setVisible(true); superscene.spacenavigator.setEditing(false); restoreCoordinals(); }
-	else if (keyEvent.getCode() == KeyCode.ESCAPE) { tzmTField.setVisible(false); tzmLabel.setVisible(true); superscene.spacenavigator.setEditing(false); } });
+	{ superscene.node3d.getBUPCoordinal().getTzmProp().set(Double.parseDouble(tzmTField.getText())); tzmTField.setVisible(false); tzmLabel.setVisible(true); superscene.mainstage.setEditing(false); restoreCoordinals(); }
+	else if (keyEvent.getCode() == KeyCode.ESCAPE) { tzmTField.setVisible(false); tzmLabel.setVisible(true); superscene.mainstage.setEditing(false); } });
     }
     
     private void createTranslateEvents()
     {
 	txLabel.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { if (mouseEvent.getClickCount() == 1)
-	{ superscene.spacenavigator.setEditing(true); txTField.setText(Double.toString(superscene.node3d.getBUPCoordinal().getTxProp().get())); txLabel.setVisible(false); txTField.setVisible(true); } });
+	{ superscene.mainstage.setEditing(true); txTField.setText(Double.toString(superscene.node3d.getBUPCoordinal().getTxProp().get())); txLabel.setVisible(false); txTField.setVisible(true); } });
 	txTField.addEventFilter(KeyEvent.KEY_PRESSED, (EventHandler<KeyEvent>) (KeyEvent keyEvent) -> { if (keyEvent.getCode() == KeyCode.ENTER)
-	{ superscene.node3d.getBUPCoordinal().getTxProp().set(Double.parseDouble(txTField.getText())); txTField.setVisible(false); txLabel.setVisible(true); superscene.spacenavigator.setEditing(false); restoreCoordinals(); }
-	else if (keyEvent.getCode() == KeyCode.ESCAPE) { txTField.setVisible(false); txLabel.setVisible(true); superscene.spacenavigator.setEditing(false); } });
+	{ superscene.node3d.getBUPCoordinal().getTxProp().set(Double.parseDouble(txTField.getText())); txTField.setVisible(false); txLabel.setVisible(true); superscene.mainstage.setEditing(false); restoreCoordinals(); }
+	else if (keyEvent.getCode() == KeyCode.ESCAPE) { txTField.setVisible(false); txLabel.setVisible(true); superscene.mainstage.setEditing(false); } });
 
 	tyLabel.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { if (mouseEvent.getClickCount() == 1)
-	{ superscene.spacenavigator.setEditing(true); tyTField.setText(Double.toString(superscene.node3d.getBUPCoordinal().getTyProp().get())); tyLabel.setVisible(false); tyTField.setVisible(true); } });
+	{ superscene.mainstage.setEditing(true); tyTField.setText(Double.toString(superscene.node3d.getBUPCoordinal().getTyProp().get())); tyLabel.setVisible(false); tyTField.setVisible(true); } });
 	tyTField.addEventFilter(KeyEvent.KEY_PRESSED, (EventHandler<KeyEvent>) (KeyEvent keyEvent) -> { if (keyEvent.getCode() == KeyCode.ENTER)
-	{ superscene.node3d.getBUPCoordinal().getTyProp().set(Double.parseDouble(tyTField.getText())); tyTField.setVisible(false); tyLabel.setVisible(true); superscene.spacenavigator.setEditing(false); restoreCoordinals(); }
-	else if (keyEvent.getCode() == KeyCode.ESCAPE) { tyTField.setVisible(false); tyLabel.setVisible(true); superscene.spacenavigator.setEditing(false); } });
+	{ superscene.node3d.getBUPCoordinal().getTyProp().set(Double.parseDouble(tyTField.getText())); tyTField.setVisible(false); tyLabel.setVisible(true); superscene.mainstage.setEditing(false); restoreCoordinals(); }
+	else if (keyEvent.getCode() == KeyCode.ESCAPE) { tyTField.setVisible(false); tyLabel.setVisible(true); superscene.mainstage.setEditing(false); } });
 	
 	tzLabel.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { if (mouseEvent.getClickCount() == 1)
-	{ superscene.spacenavigator.setEditing(true); tzTField.setText(Double.toString(superscene.node3d.getBUPCoordinal().getTzProp().get())); tzLabel.setVisible(false); tzTField.setVisible(true); } });
+	{ superscene.mainstage.setEditing(true); tzTField.setText(Double.toString(superscene.node3d.getBUPCoordinal().getTzProp().get())); tzLabel.setVisible(false); tzTField.setVisible(true); } });
 	tzTField.addEventFilter(KeyEvent.KEY_PRESSED, (EventHandler<KeyEvent>) (KeyEvent keyEvent) -> { if (keyEvent.getCode() == KeyCode.ENTER)
-	{ superscene.node3d.getBUPCoordinal().getTzProp().set(Double.parseDouble(tzTField.getText())); tzTField.setVisible(false); tzLabel.setVisible(true); superscene.spacenavigator.setEditing(false); restoreCoordinals(); }
-	else if (keyEvent.getCode() == KeyCode.ESCAPE) { tzTField.setVisible(false); tzLabel.setVisible(true); superscene.spacenavigator.setEditing(false); } });
+	{ superscene.node3d.getBUPCoordinal().getTzProp().set(Double.parseDouble(tzTField.getText())); tzTField.setVisible(false); tzLabel.setVisible(true); superscene.mainstage.setEditing(false); restoreCoordinals(); }
+	else if (keyEvent.getCode() == KeyCode.ESCAPE) { tzTField.setVisible(false); tzLabel.setVisible(true); superscene.mainstage.setEditing(false); } });
     }
     
     private void createRotateMotionEvents()
     {
 	rxmLabel.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { if (mouseEvent.getClickCount() == 1)
-	{ superscene.spacenavigator.setEditing(true); rxmTField.setText(Double.toString(superscene.node3d.getBUPCoordinal().getRxmProp().get())); rxmLabel.setVisible(false); rxmTField.setVisible(true); } });
+	{ superscene.mainstage.setEditing(true); rxmTField.setText(Double.toString(superscene.node3d.getBUPCoordinal().getRxmProp().get())); rxmLabel.setVisible(false); rxmTField.setVisible(true); } });
 	rxmTField.addEventFilter(KeyEvent.KEY_PRESSED, (EventHandler<KeyEvent>) (KeyEvent keyEvent) -> { if (keyEvent.getCode() == KeyCode.ENTER)
-	{ superscene.node3d.getBUPCoordinal().getRxmProp().set(Double.parseDouble(rxmTField.getText())); rxmTField.setVisible(false); rxmLabel.setVisible(true); superscene.spacenavigator.setEditing(false); restoreCoordinals(); }
-	else if (keyEvent.getCode() == KeyCode.ESCAPE) { rxmTField.setVisible(false); rxmLabel.setVisible(true); superscene.spacenavigator.setEditing(false); } });
+	{ superscene.node3d.getBUPCoordinal().getRxmProp().set(Double.parseDouble(rxmTField.getText())); rxmTField.setVisible(false); rxmLabel.setVisible(true); superscene.mainstage.setEditing(false); restoreCoordinals(); }
+	else if (keyEvent.getCode() == KeyCode.ESCAPE) { rxmTField.setVisible(false); rxmLabel.setVisible(true); superscene.mainstage.setEditing(false); } });
 
 	rymLabel.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { if (mouseEvent.getClickCount() == 1)
-	{ superscene.spacenavigator.setEditing(true); rymTField.setText(Double.toString(superscene.node3d.getBUPCoordinal().getRymProp().get())); rymLabel.setVisible(false); rymTField.setVisible(true); } });
+	{ superscene.mainstage.setEditing(true); rymTField.setText(Double.toString(superscene.node3d.getBUPCoordinal().getRymProp().get())); rymLabel.setVisible(false); rymTField.setVisible(true); } });
 	rymTField.addEventFilter(KeyEvent.KEY_PRESSED, (EventHandler<KeyEvent>) (KeyEvent keyEvent) -> { if (keyEvent.getCode() == KeyCode.ENTER)
-	{ superscene.node3d.getBUPCoordinal().getRymProp().set(Double.parseDouble(rymTField.getText())); rymTField.setVisible(false); rymLabel.setVisible(true); superscene.spacenavigator.setEditing(false); restoreCoordinals(); }
-	else if (keyEvent.getCode() == KeyCode.ESCAPE) { rymTField.setVisible(false); rymLabel.setVisible(true); superscene.spacenavigator.setEditing(false); } });
+	{ superscene.node3d.getBUPCoordinal().getRymProp().set(Double.parseDouble(rymTField.getText())); rymTField.setVisible(false); rymLabel.setVisible(true); superscene.mainstage.setEditing(false); restoreCoordinals(); }
+	else if (keyEvent.getCode() == KeyCode.ESCAPE) { rymTField.setVisible(false); rymLabel.setVisible(true); superscene.mainstage.setEditing(false); } });
 	
 	rzmLabel.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { if (mouseEvent.getClickCount() == 1)
-	{ superscene.spacenavigator.setEditing(true); rzmTField.setText(Double.toString(superscene.node3d.getBUPCoordinal().getRzmProp().get())); rzmLabel.setVisible(false); rzmTField.setVisible(true); } });
+	{ superscene.mainstage.setEditing(true); rzmTField.setText(Double.toString(superscene.node3d.getBUPCoordinal().getRzmProp().get())); rzmLabel.setVisible(false); rzmTField.setVisible(true); } });
 	rzmTField.addEventFilter(KeyEvent.KEY_PRESSED, (EventHandler<KeyEvent>) (KeyEvent keyEvent) -> { if (keyEvent.getCode() == KeyCode.ENTER)
-	{ superscene.node3d.getBUPCoordinal().getRzmProp().set(Double.parseDouble(rzmTField.getText())); rzmTField.setVisible(false); rzmLabel.setVisible(true); superscene.spacenavigator.setEditing(false); restoreCoordinals(); }
-	else if (keyEvent.getCode() == KeyCode.ESCAPE) { rzmTField.setVisible(false); rzmLabel.setVisible(true); superscene.spacenavigator.setEditing(false); } });
+	{ superscene.node3d.getBUPCoordinal().getRzmProp().set(Double.parseDouble(rzmTField.getText())); rzmTField.setVisible(false); rzmLabel.setVisible(true); superscene.mainstage.setEditing(false); restoreCoordinals(); }
+	else if (keyEvent.getCode() == KeyCode.ESCAPE) { rzmTField.setVisible(false); rzmLabel.setVisible(true); superscene.mainstage.setEditing(false); } });
     }
     
     private void createRotateEvents()
     {
 	rxLabel.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { if (mouseEvent.getClickCount() == 1)
-	{ superscene.spacenavigator.setEditing(true); rxTField.setText(Double.toString(superscene.node3d.getBUPCoordinal().getRxProp().get())); rxLabel.setVisible(false); rxTField.setVisible(true); } });
+	{ superscene.mainstage.setEditing(true); rxTField.setText(Double.toString(superscene.node3d.getBUPCoordinal().getRxProp().get())); rxLabel.setVisible(false); rxTField.setVisible(true); } });
 	rxTField.addEventFilter(KeyEvent.KEY_PRESSED, (EventHandler<KeyEvent>) (KeyEvent keyEvent) -> { if (keyEvent.getCode() == KeyCode.ENTER)
-	{ superscene.node3d.getBUPCoordinal().getRxProp().set(Double.parseDouble(rxTField.getText())); rxTField.setVisible(false); rxLabel.setVisible(true); superscene.spacenavigator.setEditing(false); restoreCoordinals(); }
-	else if (keyEvent.getCode() == KeyCode.ESCAPE) { rxTField.setVisible(false); rxLabel.setVisible(true); superscene.spacenavigator.setEditing(false); } });
+	{ superscene.node3d.getBUPCoordinal().getRxProp().set(Double.parseDouble(rxTField.getText())); rxTField.setVisible(false); rxLabel.setVisible(true); superscene.mainstage.setEditing(false); restoreCoordinals(); }
+	else if (keyEvent.getCode() == KeyCode.ESCAPE) { rxTField.setVisible(false); rxLabel.setVisible(true); superscene.mainstage.setEditing(false); } });
 
 	ryLabel.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { if (mouseEvent.getClickCount() == 1)
-	{ superscene.spacenavigator.setEditing(true); ryTField.setText(Double.toString(superscene.node3d.getBUPCoordinal().getRyProp().get())); ryLabel.setVisible(false); ryTField.setVisible(true); } });
+	{ superscene.mainstage.setEditing(true); ryTField.setText(Double.toString(superscene.node3d.getBUPCoordinal().getRyProp().get())); ryLabel.setVisible(false); ryTField.setVisible(true); } });
 	ryTField.addEventFilter(KeyEvent.KEY_PRESSED, (EventHandler<KeyEvent>) (KeyEvent keyEvent) -> { if (keyEvent.getCode() == KeyCode.ENTER)
-	{ superscene.node3d.getBUPCoordinal().getRyProp().set(Double.parseDouble(ryTField.getText())); ryTField.setVisible(false); ryLabel.setVisible(true); superscene.spacenavigator.setEditing(false); restoreCoordinals(); }
-	else if (keyEvent.getCode() == KeyCode.ESCAPE) { ryTField.setVisible(false); ryLabel.setVisible(true); superscene.spacenavigator.setEditing(false); } });
+	{ superscene.node3d.getBUPCoordinal().getRyProp().set(Double.parseDouble(ryTField.getText())); ryTField.setVisible(false); ryLabel.setVisible(true); superscene.mainstage.setEditing(false); restoreCoordinals(); }
+	else if (keyEvent.getCode() == KeyCode.ESCAPE) { ryTField.setVisible(false); ryLabel.setVisible(true); superscene.mainstage.setEditing(false); } });
 	
 	rzLabel.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { if (mouseEvent.getClickCount() == 1)
-	{ superscene.spacenavigator.setEditing(true); rzTField.setText(Double.toString(superscene.node3d.getBUPCoordinal().getRzProp().get())); rzLabel.setVisible(false); rzTField.setVisible(true); } });
+	{ superscene.mainstage.setEditing(true); rzTField.setText(Double.toString(superscene.node3d.getBUPCoordinal().getRzProp().get())); rzLabel.setVisible(false); rzTField.setVisible(true); } });
 	rzTField.addEventFilter(KeyEvent.KEY_PRESSED, (EventHandler<KeyEvent>) (KeyEvent keyEvent) -> { if (keyEvent.getCode() == KeyCode.ENTER)
-	{ superscene.node3d.getBUPCoordinal().getRzProp().set(Double.parseDouble(rzTField.getText())); rzTField.setVisible(false); rzLabel.setVisible(true); superscene.spacenavigator.setEditing(false); restoreCoordinals(); }
-	else if (keyEvent.getCode() == KeyCode.ESCAPE) { rzTField.setVisible(false); rzLabel.setVisible(true); superscene.spacenavigator.setEditing(false); } });
+	{ superscene.node3d.getBUPCoordinal().getRzProp().set(Double.parseDouble(rzTField.getText())); rzTField.setVisible(false); rzLabel.setVisible(true); superscene.mainstage.setEditing(false); restoreCoordinals(); }
+	else if (keyEvent.getCode() == KeyCode.ESCAPE) { rzTField.setVisible(false); rzLabel.setVisible(true); superscene.mainstage.setEditing(false); } });
     }
     
-//    public void disableMouseMovement()			    {superscene.spacenavigator.stage.removeEventFilter(MouseEvent.MOUSE_MOVED, superscene.spacenavigator.mouseMovedHandler); superscene.subScene.setCursor(Cursor.DEFAULT);}
-    public final void disableMouseMovement()			    {superscene.spacenavigator.disableMouseMovement();}
+//    public void disableMouseMovement()			    {superscene.mainstage.stage.removeEventFilter(MouseEvent.MOUSE_MOVED, superscene.mainstage.mouseMovedHandler); superscene.subScene.setCursor(Cursor.DEFAULT);}
+    public final void disableMouseMovement()			    {superscene.mainstage.disableMouseMovement();}
     private void restoreCoordinals() { superscene.restoreCoordinalsForAllNodes(); }
     
     public Group getRootGroup() { return rootGroup; }

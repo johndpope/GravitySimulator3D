@@ -32,7 +32,7 @@ public class MyLight extends Node3D
 //	createMenu();
 
 //	lighting = new Lighting();
-//	Image image =	new Image(SpaceNavigator.class.getResource(filename).toExternalForm());
+//	Image image =	new Image(GravitySimulator3D.class.getResource(filename).toExternalForm());
 //	PhongMaterial phongMaterial = new PhongMaterial();
 //	phongMaterial.setDiffuseMap(image);
 

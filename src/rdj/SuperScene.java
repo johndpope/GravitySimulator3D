@@ -105,7 +105,7 @@ public class SuperScene
     protected	Label		    sceneTitleLabel, sceneIdLabel, switchMotionLabel, switchGravityLabel, restoreCoordinalLabel, nodesTitleLabel;
     protected	TitledPane	    titledPane;
     protected	VBox		    sceneDisplayActionVBox;
-    protected	MainStage	    spacenavigator;
+    protected	MainStage	    mainstage;
     protected   VBox		    sceneSectionVBox, sceneListVBox, sceneFunctionsVBox, nodeSectionVBox, nodeListVBox;//, navSectionVBox, navButtonVBox;
     private	RotateTransition    flipSceneSectionToFrontTransition1, flipSceneSectionToFrontTransition2, flipSceneSectionToBackTransition1, flipSceneSectionToBackTransition2;
     private	RotateTransition    flipNodeSectionToFrontTransition1, flipNodeSectionToFrontTransition2, flipNodeSectionToBackTransition1, flipNodeSectionToBackTransition2;
@@ -185,7 +185,7 @@ public class SuperScene
 	sceneScenesRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { sceneScenesRect.setFill(Color.rgb(255,255,255,0.5)); });
 	sceneScenesRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> 
 	{
-	    spacenavigator.getSceneDisplayController().disableMouseMovement();
+	    mainstage.getSceneDisplayController().disableMouseMovement();
 //	    flipSceneSectionDisplayToBack();
 	    flipSceneSectionDisplayToBack(getSceneListVBox(180d, 130d, 15d, Font.getDefault().getName(), FontWeight.NORMAL, FontPosture.REGULAR, 10d, true, false));
 	});
@@ -201,8 +201,8 @@ public class SuperScene
 	sceneReloadRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { sceneReloadRect.setFill(Color.rgb(255,255,255,0.5)); });
 	sceneReloadRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> 
 	{
-	    spacenavigator.getSceneDisplayController().disableMouseMovement();
-	    spacenavigator.switch2LoadScene(MainStage.scenefile);
+	    mainstage.getSceneDisplayController().disableMouseMovement();
+	    mainstage.switch2LoadScene(MainStage.scenefile);
 	});
 	sceneReloadRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { sceneReloadRect.setFill(Color.rgb(0,0,0,0.0)); });
 	sceneFunctionsVBox.getChildren().add(sceneReloadHBox);
@@ -216,7 +216,7 @@ public class SuperScene
 	cachingRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { cachingRect.setFill(Color.rgb(255,255,255,0.5)); });
 	cachingRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> 
 	{
-	    spacenavigator.getSceneDisplayController().disableMouseMovement(); 
+	    mainstage.getSceneDisplayController().disableMouseMovement(); 
 	    caching=!caching; setCachingForAllNodes(caching); if (caching) { setCachingLabelBold(caching); } else { setCachingLabelBold(caching); }
 	});
 	cachingRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { cachingRect.setFill(Color.rgb(0,0,0,0.0)); });
@@ -231,7 +231,7 @@ public class SuperScene
 	sceneMotionRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { sceneMotionRect.setFill(Color.rgb(255,255,255,0.5)); });
 	sceneMotionRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> 
 	{
-	    spacenavigator.getSceneDisplayController().disableMouseMovement(); 
+	    mainstage.getSceneDisplayController().disableMouseMovement(); 
 //	    motional=!motional; setMotionForAllMotionStateChangeableNodes(motional); setMotionLabelBold(motional);
 	    switchMotionForAllMotionStateChangeableNodes();
 	});
@@ -247,7 +247,7 @@ public class SuperScene
 	sceneSteppingRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { sceneSteppingRect.setFill(Color.rgb(255,255,255,0.5)); });
 	sceneSteppingRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> 
 	{
-	    spacenavigator.getSceneDisplayController().disableMouseMovement(); 
+	    mainstage.getSceneDisplayController().disableMouseMovement(); 
 	    steppingEnabled=!steppingEnabled; setSteppingForAllMotionStateChangeableNodes(steppingEnabled); setSteppingLabelBold(steppingEnabled);
 	});
 	sceneSteppingRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { sceneSteppingRect.setFill(Color.rgb(0,0,0,0.0)); });
@@ -262,7 +262,7 @@ public class SuperScene
 	sceneGravityRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { sceneGravityRect.setFill(Color.rgb(255,255,255,0.5)); });
 	sceneGravityRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> 
 	{
-	    spacenavigator.getSceneDisplayController().disableMouseMovement(); 
+	    mainstage.getSceneDisplayController().disableMouseMovement(); 
 	    switchGravitationalMotion();
 	});
 	sceneGravityRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { sceneGravityRect.setFill(Color.rgb(0,0,0,0.0)); });
@@ -277,7 +277,7 @@ public class SuperScene
 	sceneCollisionsRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { sceneCollisionsRect.setFill(Color.rgb(255,255,255,0.5)); });
 	sceneCollisionsRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> 
 	{
-	    spacenavigator.getSceneDisplayController().disableMouseMovement(); 
+	    mainstage.getSceneDisplayController().disableMouseMovement(); 
 	    switchCollisionDetection();
 	});
 	sceneCollisionsRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { sceneCollisionsRect.setFill(Color.rgb(0,0,0,0.0)); });
@@ -292,7 +292,7 @@ public class SuperScene
 	sceneShearRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { sceneShearRect.setFill(Color.rgb(255,255,255,0.5)); });
 	sceneShearRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> 
 	{
-	    spacenavigator.getSceneDisplayController().disableMouseMovement(); 
+	    mainstage.getSceneDisplayController().disableMouseMovement(); 
 	    switchShearForAllNodes();
 	});
 	sceneShearRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { sceneShearRect.setFill(Color.rgb(0,0,0,0.0)); });
@@ -307,7 +307,7 @@ public class SuperScene
 	sceneBackupRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { sceneBackupRect.setFill(Color.rgb(255,255,255,0.5)); });
 	sceneBackupRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> 
 	{
-	    spacenavigator.getSceneDisplayController().disableMouseMovement(); 
+	    mainstage.getSceneDisplayController().disableMouseMovement(); 
 	    backupCoordinalsForAllNodes();
 	});
 	sceneBackupRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { sceneBackupRect.setFill(Color.rgb(0,0,0,0.0)); });
@@ -322,7 +322,7 @@ public class SuperScene
 	sceneRestoreRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { sceneRestoreRect.setFill(Color.rgb(255,255,255,0.5)); });
 	sceneRestoreRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> 
 	{
-	    spacenavigator.getSceneDisplayController().disableMouseMovement(); 
+	    mainstage.getSceneDisplayController().disableMouseMovement(); 
 	    restoreCoordinalsForAllMotionStateChangeableNodes();
 	});
 	sceneRestoreRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { sceneRestoreRect.setFill(Color.rgb(0,0,0,0.0)); });
@@ -337,7 +337,7 @@ public class SuperScene
 	scenePrintRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { scenePrintRect.setFill(Color.rgb(255,255,255,0.5)); });
 	scenePrintRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> 
 	{
-	    spacenavigator.getSceneDisplayController().disableMouseMovement(); 
+	    mainstage.getSceneDisplayController().disableMouseMovement(); 
 	    print();
 	});
 	scenePrintRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { scenePrintRect.setFill(Color.rgb(0,0,0,0.0)); });
@@ -352,7 +352,7 @@ public class SuperScene
 //	sceneRecordRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { sceneRecordRect.setFill(Color.rgb(255,255,255,0.5)); });
 //	sceneRecordRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> 
 //	{
-//	    spacenavigator.getSceneDisplayController().disableMouseMovement(); 
+//	    mainstage.getSceneDisplayController().disableMouseMovement(); 
 //	    switchRecording();
 //	});
 //	sceneRecordRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { sceneRecordRect.setFill(Color.rgb(0,0,0,0.0)); });
@@ -367,7 +367,7 @@ public class SuperScene
 	sceneExitRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { sceneExitRect.setFill(Color.rgb(255,255,255,0.5)); });
 	sceneExitRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> 
 	{
-	    spacenavigator.getSceneDisplayController().disableMouseMovement();
+	    mainstage.getSceneDisplayController().disableMouseMovement();
 	    System.exit(0);
 	});
 	sceneExitRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { sceneExitRect.setFill(Color.rgb(0,0,0,0.0)); });
@@ -378,8 +378,8 @@ public class SuperScene
 
 	// Add and set initial sceneSectionVBox in sceneDisplay
 	if (sceneSectionVBox.getChildren().isEmpty()) { sceneSectionVBox.getChildren().add(sceneFunctionsVBox); } else {sceneSectionVBox.getChildren().set(0,sceneFunctionsVBox);}
-//	if (!nodeObservableList.isEmpty()) { spacenavigator.getSceneDisplayController().getMainVBox().getChildren().set(2, sceneSectionVBox); }
-	spacenavigator.getSceneDisplayController().getMainVBox().getChildren().set(2, sceneSectionVBox);
+//	if (!nodeObservableList.isEmpty()) { mainstage.getSceneDisplayController().getMainVBox().getChildren().set(2, sceneSectionVBox); }
+	mainstage.getSceneDisplayController().getMainVBox().getChildren().set(2, sceneSectionVBox);
     }
     
     public VBox getSceneListVBox(double rotateY, double prefWidth, double rowHeight, String fontName, FontWeight fontWeight, FontPosture fontPosture, double fontSize, boolean backEntry, boolean exitEntry)
@@ -411,8 +411,8 @@ public class SuperScene
 		startSceneListItemRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { startSceneListItemRect.setFill(Color.rgb(255,255,255,0.5)); });
 		startSceneListItemRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) ->
 		{
-		    spacenavigator.getSceneDisplayController().disableMouseMovement(); 
-		    spacenavigator.switch2LoadScene(path);
+		    mainstage.getSceneDisplayController().disableMouseMovement(); 
+		    mainstage.switch2LoadScene(path);
 		});
 		startSceneListItemRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { startSceneListItemRect.setFill(Color.rgb(0,0,0,0.0)); });
 	    }
@@ -433,7 +433,7 @@ public class SuperScene
 	    sceneListItemBackRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { sceneListItemBackRect.setFill(Color.rgb(255,255,255,0.5)); });
 	    sceneListItemBackRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) ->
 	    {
-		spacenavigator.getSceneDisplayController().disableMouseMovement(); 
+		mainstage.getSceneDisplayController().disableMouseMovement(); 
 		flipSceneSectionDisplayToFront(sceneFunctionsVBox);
 	    });
 	    sceneListItemBackRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { sceneListItemBackRect.setFill(Color.rgb(0,0,0,0.0)); });
@@ -453,7 +453,7 @@ public class SuperScene
 	    sceneExitRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { sceneExitRect.setFill(Color.rgb(255,255,255,0.5)); });
 	    sceneExitRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> 
 	    {
-		spacenavigator.getSceneDisplayController().disableMouseMovement();
+		mainstage.getSceneDisplayController().disableMouseMovement();
 		System.exit(0);
 	    });
 	    sceneExitRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { sceneExitRect.setFill(Color.rgb(0,0,0,0.0)); });
@@ -552,7 +552,7 @@ public class SuperScene
 
 	textArea.setText(text.getText());
         Group root = new Group(textArea);
-	spacenavigator.stage.setFullScreen(false);
+	mainstage.stage.setFullScreen(false);
 	Stage stage = new Stage();
 	stage.setAlwaysOnTop(true);
         stage.setTitle("Printed node: " + node3d.getId());
@@ -590,9 +590,9 @@ public class SuperScene
 	// Stick the nodesection to the SceneDisplay
 //	if ( ! nodeObservableList.isEmpty() )
 //	{
-	    spacenavigator.getSceneDisplayController().getMainVBox().getChildren().set(3, nodeSectionVBox); 
-	    spacenavigator.getSceneDisplayController().fpsVBox.setVisible(true);
-	    spacenavigator.getSceneDisplayController().factorVBox.setVisible(true);
+	    mainstage.getSceneDisplayController().getMainVBox().getChildren().set(3, nodeSectionVBox); 
+	    mainstage.getSceneDisplayController().fpsVBox.setVisible(true);
+	    mainstage.getSceneDisplayController().factorVBox.setVisible(true);
 //	}
 	
 //	// Add nodeItems to nodeListVBox
@@ -602,7 +602,7 @@ public class SuperScene
     public void flipSceneSectionDisplayToBack(VBox vbox)
     {
 	double flipDuration = 0.25;
-	spacenavigator.disableMouseMovement();
+	mainstage.disableMouseMovement();
 	flipSceneSectionToBackTransition1 = new RotateTransition(Duration.seconds(flipDuration), sceneSectionVBox);
 	flipSceneSectionToBackTransition1.setInterpolator(Interpolator.EASE_IN);
 	flipSceneSectionToBackTransition1.setAxis(Rotate.Y_AXIS);
@@ -623,7 +623,7 @@ public class SuperScene
     public void flipSceneSectionDisplayToFront(VBox vbox)
     {
 	double flipDuration = 0.25;
-	spacenavigator.disableMouseMovement();
+	mainstage.disableMouseMovement();
 	flipSceneSectionToFrontTransition1 = new RotateTransition(Duration.seconds(flipDuration), sceneSectionVBox);
 	flipSceneSectionToFrontTransition1.setInterpolator(Interpolator.EASE_IN);
 	flipSceneSectionToFrontTransition1.setAxis(Rotate.Y_AXIS);
@@ -644,7 +644,7 @@ public class SuperScene
     public void flipNodeSectionDisplayToBack(VBox vbox)
     {
 	double flipDuration = 0.25;
-	spacenavigator.disableMouseMovement();
+	mainstage.disableMouseMovement();
 	flipNodeSectionToBackTransition1 = new RotateTransition(Duration.seconds(flipDuration), nodeSectionVBox);
 	flipNodeSectionToBackTransition1.setInterpolator(Interpolator.EASE_IN);
 	flipNodeSectionToBackTransition1.setAxis(Rotate.Y_AXIS);
@@ -665,7 +665,7 @@ public class SuperScene
     public void flipNodeSectionDisplayToFront(VBox vbox)
     {
 	double flipDuration = 0.25;
-	spacenavigator.disableMouseMovement();
+	mainstage.disableMouseMovement();
 	flipNodeSectionToFrontTransition1 = new RotateTransition(Duration.seconds(flipDuration), nodeSectionVBox);
 	flipNodeSectionToFrontTransition1.setInterpolator(Interpolator.EASE_IN);
 	flipNodeSectionToFrontTransition1.setAxis(Rotate.Y_AXIS);
@@ -812,7 +812,7 @@ public class SuperScene
 	// Prevent error: Not on FX application thread;
 	Platform.runLater(() -> 
 	{
-	    spacenavigator.getSceneDisplayController().fpsLabel.setText(getNum(realFrameRate,1));
+	    mainstage.getSceneDisplayController().fpsLabel.setText(getNum(realFrameRate,1));
 	});
     }
 
@@ -1140,8 +1140,8 @@ public class SuperScene
     protected void setupSubscene()
     {
 	rootGroup = new Group();
-	if (1<=ssVerbosity) {System.out.println("SubScene(rootGroup, " +spacenavigator.stage.getWidth() + ", " +spacenavigator.stage.getHeight()+ ", " + true + ", SceneAntialiasing.BALANCED)");}
-	subScene = new SubScene(rootGroup, spacenavigator.stage.getWidth(), spacenavigator.stage.getHeight(), true, SceneAntialiasing.BALANCED);			// Create subscene with group
+	if (1<=ssVerbosity) {System.out.println("SubScene(rootGroup, " +mainstage.stage.getWidth() + ", " +mainstage.stage.getHeight()+ ", " + true + ", SceneAntialiasing.BALANCED)");}
+	subScene = new SubScene(rootGroup, mainstage.stage.getWidth(), mainstage.stage.getHeight(), true, SceneAntialiasing.BALANCED);			// Create subscene with group
 	subScene.setFill(Color.BLACK);
     }
 

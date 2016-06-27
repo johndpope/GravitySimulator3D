@@ -161,10 +161,10 @@ public class LoadScene extends SuperScene
     private static ScriptEngineManager factory;
     private static ScriptEngine scriptEngine;
         
-    public LoadScene(MainStage sn, Path scenefile) throws Exception
+    public LoadScene(MainStage ms, Path scenefile) throws Exception
     {
 	lsVerbosity = 0;
-	super.spacenavigator = sn;
+	super.mainstage = ms;
 	setupSubscene();
 	createSceneSectionVBoxForSceneDisplay();
 	createNodeSectionVBoxForSceneDisplay();
@@ -351,25 +351,25 @@ public class LoadScene extends SuperScene
 			
 			if (function.equalsIgnoreCase("Browser"))
 			{
-			    if (super.spacenavigator != null)	{ if (2<=lsVerbosity) { super.spacenavigator.notifyPreloader(new Preloader.ErrorNotification("info","LoadScene",new Throwable(" Creating " + type + " " + name))); }}
+			    if (super.mainstage != null)	{ if (2<=lsVerbosity) { super.mainstage.notifyPreloader(new Preloader.ErrorNotification("info","LoadScene",new Throwable(" Creating " + type + " " + name))); }}
 			    if ((celestialRef.length()>0)&&(imageFile.length()>3)) {scoopedNode3dArrayList.add(0, new MyBrowser(this, name+ns, eval(width), eval(height) , Celestials.get(celestialRef,ssVerbosity), fontName, fontWeight, fontPosture, fontSize, eval(opacity), cached, ssVerbosity));}
 			    else						{scoopedNode3dArrayList.add(0, new MyBrowser(this, name+ns, eval(width), eval(height) , new Celestial(celestialName,eval(celestialMass),eval(celestialRadius),celestialGravitational, celestialCollisional, celestialGroup, celestialPolarity), fontName, fontWeight, fontPosture, fontSize, eval(opacity), cached, ssVerbosity));}
 			}
 			else if (function.equalsIgnoreCase("Camera"))
 			{
-			    if (super.spacenavigator != null)	{ if (2<=lsVerbosity) { super.spacenavigator.notifyPreloader(new Preloader.ErrorNotification("info","LoadScene",new Throwable(" Creating " + type + " " + name))); }}
-			    if (celestialRef.length()>0)		{scoopedNode3dArrayList.add(0, new MyCamera(this, name+ns, Celestials.get(celestialRef,ssVerbosity), eval(zoomAngle), new ImportModel(super.spacenavigator, meshFile, meshNodeFilter, ssVerbosity).getGroup(), lightType, cached, ssVerbosity));}
-			    else				{scoopedNode3dArrayList.add(0, new MyCamera(this, name+ns, new Celestial(celestialName,eval(celestialMass),eval(celestialRadius),celestialGravitational, celestialCollisional, celestialGroup, celestialPolarity), eval(zoomAngle), new ImportModel(super.spacenavigator, meshFile, meshNodeFilter, ssVerbosity).getGroup(), 2, cached, ssVerbosity));}
+			    if (super.mainstage != null)	{ if (2<=lsVerbosity) { super.mainstage.notifyPreloader(new Preloader.ErrorNotification("info","LoadScene",new Throwable(" Creating " + type + " " + name))); }}
+			    if (celestialRef.length()>0)		{scoopedNode3dArrayList.add(0, new MyCamera(this, name+ns, Celestials.get(celestialRef,ssVerbosity), eval(zoomAngle), new ImportModel(super.mainstage, meshFile, meshNodeFilter, ssVerbosity).getGroup(), lightType, cached, ssVerbosity));}
+			    else				{scoopedNode3dArrayList.add(0, new MyCamera(this, name+ns, new Celestial(celestialName,eval(celestialMass),eval(celestialRadius),celestialGravitational, celestialCollisional, celestialGroup, celestialPolarity), eval(zoomAngle), new ImportModel(super.mainstage, meshFile, meshNodeFilter, ssVerbosity).getGroup(), 2, cached, ssVerbosity));}
 			}
 			else if (function.equalsIgnoreCase("Light"))
 			{
-			    if (super.spacenavigator != null)	{ if (2<=lsVerbosity) { super.spacenavigator.notifyPreloader(new Preloader.ErrorNotification("info","LoadScene",new Throwable(" Creating " + type + " " + name))); }}
+			    if (super.mainstage != null)	{ if (2<=lsVerbosity) { super.mainstage.notifyPreloader(new Preloader.ErrorNotification("info","LoadScene",new Throwable(" Creating " + type + " " + name))); }}
 			    if (celestialRef.length()>0)		{scoopedNode3dArrayList.add(0, new MyLight(this, name+ns, lightType, divisions, Celestials.get(celestialRef,ssVerbosity), cached, ssVerbosity));}
 			    else				{scoopedNode3dArrayList.add(0, new MyLight(this, name+ns, lightType, divisions, new Celestial(celestialName,eval(celestialMass),eval(celestialRadius),celestialGravitational, celestialCollisional, celestialGroup, celestialPolarity), cached, ssVerbosity));}
 			}
 			else if (function.equalsIgnoreCase("Box"))
 			{
-			    if (super.spacenavigator != null)	{ if (2<=lsVerbosity) { super.spacenavigator.notifyPreloader(new Preloader.ErrorNotification("info","LoadScene",new Throwable(" Creating " + type + " " + name))); }}
+			    if (super.mainstage != null)	{ if (2<=lsVerbosity) { super.mainstage.notifyPreloader(new Preloader.ErrorNotification("info","LoadScene",new Throwable(" Creating " + type + " " + name))); }}
 			    if ((!fileIsReadable(imageFile)) || (mapType.equalsIgnoreCase("DiffuseColor")))
 			    {
 				if ((celestialRef.length()>0)&&(imageFile.length()>3)) {scoopedNode3dArrayList.add(0, new MyBox(this, name+ns, eval(width), eval(height) , eval(depth), Celestials.get(celestialRef,ssVerbosity), cullFace, drawMode, color, eval(opacity), cached, ssVerbosity));}
@@ -383,7 +383,7 @@ public class LoadScene extends SuperScene
 			}		
 			else if (function.equalsIgnoreCase("Cylinder"))
 			{
-			    if (super.spacenavigator != null) { if (2<=lsVerbosity) { super.spacenavigator.notifyPreloader(new Preloader.ErrorNotification("info","LoadScene",new Throwable(" Creating " + type + " " + name))); }}
+			    if (super.mainstage != null) { if (2<=lsVerbosity) { super.mainstage.notifyPreloader(new Preloader.ErrorNotification("info","LoadScene",new Throwable(" Creating " + type + " " + name))); }}
 			    if ((!fileIsReadable(imageFile)) || (mapType.equalsIgnoreCase("DiffuseColor")))
 			    {
 				if (celestialRef.length()>0)   {scoopedNode3dArrayList.add(0, new MyCylinder(this, name+ns, eval(height), Celestials.get(celestialRef,ssVerbosity), divisions, cullFace, drawMode, color, eval(opacity), cached, ssVerbosity));}
@@ -397,7 +397,7 @@ public class LoadScene extends SuperScene
 			}
 			else if (function.equalsIgnoreCase("Sphere")) // Single Sphere
 			{
-			    if (super.spacenavigator != null)	{ if (2<=lsVerbosity) { super.spacenavigator.notifyPreloader(new Preloader.ErrorNotification("info","LoadScene",new Throwable(" Creating " + type + " " + name))); }}
+			    if (super.mainstage != null)	{ if (2<=lsVerbosity) { super.mainstage.notifyPreloader(new Preloader.ErrorNotification("info","LoadScene",new Throwable(" Creating " + type + " " + name))); }}
 			    if ((!fileIsReadable(imageFile)) || (mapType.equalsIgnoreCase("DiffuseColor")))
 			    {
 				if (celestialRef.length()>0)	{scoopedNode3dArrayList.add(0, new MySphere(this, name+ns, Celestials.get(celestialRef,ssVerbosity), divisions, cullFace, drawMode, color, eval(opacity), cached, ssVerbosity));}
@@ -412,7 +412,7 @@ public class LoadScene extends SuperScene
 			else if (function.equalsIgnoreCase("HyperSphere")) // Spheres in a HyperSphere shape
 			{
 			    MyHyperSphere myHyperSphere;
-			    if (super.spacenavigator != null)	{ if (2<=lsVerbosity) { super.spacenavigator.notifyPreloader(new Preloader.ErrorNotification("info","LoadScene",new Throwable(" Creating " + type + " " + name))); }}
+			    if (super.mainstage != null)	{ if (2<=lsVerbosity) { super.mainstage.notifyPreloader(new Preloader.ErrorNotification("info","LoadScene",new Throwable(" Creating " + type + " " + name))); }}
 			    if (celestialRef.length()>0)	{ myHyperSphere = new MyHyperSphere(this, name+ns, Celestials.get(celestialRef,ssVerbosity), cached, ssVerbosity);}
 			    else				{ myHyperSphere = new MyHyperSphere(this, name+ns, new Celestial(celestialName,eval(celestialMass),eval(celestialRadius),celestialGravitational, celestialCollisional, celestialGroup, celestialPolarity), cached, ssVerbosity);}
 			    if ((!fileIsReadable(imageFile)) || (mapType.equalsIgnoreCase("DiffuseColor"))) { scoopedNode3dArrayList.addAll(myHyperSphere.createHyperSphere(new Point3D(0,0,0), shells, eval(shellRadius), eval(shellResolution), eval(shellMotion), eval(randomise), eval(celestialRadius), divisions, cullFace, drawMode, color, eval(opacity))); }
@@ -421,7 +421,7 @@ public class LoadScene extends SuperScene
 			else if (function.equalsIgnoreCase("Torus")) // Spheres in Torus shape
 			{
 			    MyHyperSphere myHyperSphere;
-			    if (super.spacenavigator != null)	{ if (2<=lsVerbosity) { super.spacenavigator.notifyPreloader(new Preloader.ErrorNotification("info","LoadScene",new Throwable(" Creating " + type + " " + name))); }}
+			    if (super.mainstage != null)	{ if (2<=lsVerbosity) { super.mainstage.notifyPreloader(new Preloader.ErrorNotification("info","LoadScene",new Throwable(" Creating " + type + " " + name))); }}
 			    if (celestialRef.length()>0)	{ myHyperSphere = new MyHyperSphere(this, name+ns, Celestials.get(celestialRef,ssVerbosity), cached, ssVerbosity);}
 			    else				{ myHyperSphere = new MyHyperSphere(this, name+ns, new Celestial(celestialName,eval(celestialMass),eval(celestialRadius),celestialGravitational, celestialCollisional, celestialGroup, celestialPolarity), cached, ssVerbosity);}
 			    if ((!fileIsReadable(imageFile)) || (mapType.equalsIgnoreCase("DiffuseColor"))) { scoopedNode3dArrayList.addAll(myHyperSphere.createTorus(new Point3D(0,0,0), eval(torusRotate), shells, eval(shellRadius), eval(shellResolution), eval(shellMotion), eval(randomise), eval(celestialRadius), divisions, cullFace, drawMode, color, eval(opacity), true)); }
@@ -429,37 +429,37 @@ public class LoadScene extends SuperScene
 			}
 			else if (function.equalsIgnoreCase("Mesh"))
 			{
-			    if (super.spacenavigator != null)	{ if (2<=lsVerbosity) { super.spacenavigator.notifyPreloader(new Preloader.ErrorNotification("info","LoadScene",new Throwable(" Creating " + type + " " + name))); }}
+			    if (super.mainstage != null)	{ if (2<=lsVerbosity) { super.mainstage.notifyPreloader(new Preloader.ErrorNotification("info","LoadScene",new Throwable(" Creating " + type + " " + name))); }}
 			    if (celestialRef.length()>0)	{scoopedNode3dArrayList.add(0, new MyMesh(this, name+ns, Celestials.get(celestialRef,ssVerbosity), getModel(meshFile, meshNodeFilter, ssVerbosity), cached, ssVerbosity));}
 			    else				{scoopedNode3dArrayList.add(0, new MyMesh(this, name+ns, new Celestial(celestialName,eval(celestialMass),eval(celestialRadius),celestialGravitational, celestialCollisional, celestialGroup, celestialPolarity), getModel(meshFile, meshNodeFilter, ssVerbosity), cached, ssVerbosity));}
 			}		
 			else if (function.equalsIgnoreCase("Axis"))
 			{
-			    if (super.spacenavigator != null)	{ if (2<=lsVerbosity) { super.spacenavigator.notifyPreloader(new Preloader.ErrorNotification("info","LoadScene",new Throwable(" Creating " + type + " " + name))); }}
+			    if (super.mainstage != null)	{ if (2<=lsVerbosity) { super.mainstage.notifyPreloader(new Preloader.ErrorNotification("info","LoadScene",new Throwable(" Creating " + type + " " + name))); }}
 			    if (celestialRef.length()>0)	{scoopedNode3dArrayList.add(0, new MyAxis(this, name+ns, eval(width), eval(height) , eval(depth), Celestials.get(celestialRef,ssVerbosity), cached, ssVerbosity));}
 			    else				{scoopedNode3dArrayList.add(0, new MyAxis(this, name+ns, 1, 1 , 1, new Celestial(celestialName,eval(celestialMass),eval(celestialRadius),celestialGravitational, celestialCollisional, celestialGroup, celestialPolarity), cached, ssVerbosity));}
 			}		
 			else if (function.equalsIgnoreCase("Stars"))
 			{
-			    if (super.spacenavigator != null)	{ if (2<=lsVerbosity) { super.spacenavigator.notifyPreloader(new Preloader.ErrorNotification("info","LoadScene",new Throwable(" Creating " + type + " " + name))); }}
+			    if (super.mainstage != null)	{ if (2<=lsVerbosity) { super.mainstage.notifyPreloader(new Preloader.ErrorNotification("info","LoadScene",new Throwable(" Creating " + type + " " + name))); }}
 			    if (celestialRef.length()>0)	{scoopedNode3dArrayList.add(0, new MyStars(this, name+ns, Celestials.get(celestialRef,ssVerbosity), eval(totalStars), eval(minStarDistance), eval(maxStarDistance), getImage(imageFile), selfIlluminating, cached, ssVerbosity));}
 			    else				{scoopedNode3dArrayList.add(0, new MyStars(this, name+ns, new Celestial(celestialName,eval(celestialMass),eval(celestialRadius),celestialGravitational, celestialCollisional, celestialGroup, celestialPolarity), eval(totalStars), eval(minStarDistance), eval(maxStarDistance), getImage(imageFile), selfIlluminating, cached, ssVerbosity));}
 			}		
 			else if (function.equalsIgnoreCase("Text"))
 			{
-			    if (super.spacenavigator != null)	{ if (2<=lsVerbosity) { super.spacenavigator.notifyPreloader(new Preloader.ErrorNotification("info","LoadScene",new Throwable(" Creating " + type + " " + name))); }}
+			    if (super.mainstage != null)	{ if (2<=lsVerbosity) { super.mainstage.notifyPreloader(new Preloader.ErrorNotification("info","LoadScene",new Throwable(" Creating " + type + " " + name))); }}
 			    if (celestialRef.length()>0)	{scoopedNode3dArrayList.add(0, new MyText(this, name+ns, Celestials.get(celestialRef,ssVerbosity), getText(textFile), fontName, fontWeight, fontPosture, fontSize, color, eval(opacity), cached, ssVerbosity));}
 			    else				{scoopedNode3dArrayList.add(0, new MyText(this, name+ns, new Celestial(celestialName,eval(celestialMass),eval(celestialRadius),celestialGravitational, celestialCollisional, celestialGroup, celestialPolarity), getText(textFile), fontName, fontWeight, fontPosture, fontSize, color, eval(opacity), cached, ssVerbosity));}
 			}		
 			else if (function.equalsIgnoreCase("Dummy"))
 			{
-			    if (super.spacenavigator != null)	{ if (2<=lsVerbosity) { super.spacenavigator.notifyPreloader(new Preloader.ErrorNotification("info","LoadScene",new Throwable(" Creating " + type + " " + name))); }}
+			    if (super.mainstage != null)	{ if (2<=lsVerbosity) { super.mainstage.notifyPreloader(new Preloader.ErrorNotification("info","LoadScene",new Throwable(" Creating " + type + " " + name))); }}
 			    if (celestialRef.length()>0)	{scoopedNode3dArrayList.add(0, new MyDummy(this, name+ns, Celestials.get(celestialRef,ssVerbosity), cached, ssVerbosity));}
 			    else				{scoopedNode3dArrayList.add(0, new MyDummy(this, name+ns, new Celestial(celestialName,eval(celestialMass),eval(celestialRadius),celestialGravitational, celestialCollisional, celestialGroup, celestialPolarity), cached, ssVerbosity));}
 			}		
 			else
 			{
-			    if (super.spacenavigator != null)	{ if (2<=lsVerbosity) { super.spacenavigator.notifyPreloader(new Preloader.ErrorNotification("info","LoadScene",new Throwable(" Ignoring " + type + " " + name))); }}
+			    if (super.mainstage != null)	{ if (2<=lsVerbosity) { super.mainstage.notifyPreloader(new Preloader.ErrorNotification("info","LoadScene",new Throwable(" Ignoring " + type + " " + name))); }}
 			    System.out.println("Ignoring Unknown Node Function: " + function);
 			    load = false;
 			}		
@@ -557,10 +557,10 @@ public class LoadScene extends SuperScene
 	    setControlNode(node);
 	    break;
 	} else { System.err.println("Error: No Camera object found in scenefile: " + sceneFile); } }
-	spacenavigator.getSceneDisplayController().frameRateLabel.setText(super.getNum(targetFrameRate,1));
-	spacenavigator.getSceneDisplayController().motionRateLabel.setText(super.getNum(motionRate,1));
-	spacenavigator.getSceneDisplayController().motionFactorLabel.setText(super.getNum(motionFactor,1));
-	spacenavigator.getSceneDisplayController().gravityFactorLabel.setText(super.getNum(gravityFactor,1));
+	mainstage.getSceneDisplayController().frameRateLabel.setText(super.getNum(targetFrameRate,1));
+	mainstage.getSceneDisplayController().motionRateLabel.setText(super.getNum(motionRate,1));
+	mainstage.getSceneDisplayController().motionFactorLabel.setText(super.getNum(motionFactor,1));
+	mainstage.getSceneDisplayController().gravityFactorLabel.setText(super.getNum(gravityFactor,1));
 
 	startScene();
     }
@@ -610,7 +610,7 @@ public class LoadScene extends SuperScene
 	return new Image(getClass().getResource(imageFile).toExternalForm());
     }
     
-    private Group getModel(String meshFile, String meshNodeFilter, int verbosity)  { return new ImportModel(super.spacenavigator, meshFile, meshNodeFilter, verbosity).getGroup(); }
+    private Group getModel(String meshFile, String meshNodeFilter, int verbosity)  { return new ImportModel(super.mainstage, meshFile, meshNodeFilter, verbosity).getGroup(); }
     
     public String getText(String file)
     {

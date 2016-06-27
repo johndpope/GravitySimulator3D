@@ -41,6 +41,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import static javafx.application.Application.launch;
+import static javafx.application.Application.launch;
+import static javafx.application.Application.launch;
 
 public class MainStage extends Application
 {
@@ -68,23 +70,23 @@ public class MainStage extends Application
     {
 	major = 1; minor = 8; update = 3; version = "v" + major + "." + minor + "." + update;
 	notifyPreloader(new ErrorNotification("progress","show",new Throwable("")));
-	notifyPreloader(new ErrorNotification("application","title",new Throwable("SpaceNavigator " + version)));
+	notifyPreloader(new ErrorNotification("application","title",new Throwable("GravitySimulator3D " + version)));
         notifyPreloader(new Preloader.StateChangeNotification(StateChangeNotification.Type.BEFORE_INIT));
-	notifyPreloader(new ErrorNotification("info","SpaceNavigator",new Throwable("initializing...")));
+	notifyPreloader(new ErrorNotification("info","GravitySimulator3D",new Throwable("initializing...")));
 	notifyPreloader(new ProgressNotification(0));
 
         FileSystem defaultfs = FileSystems.getDefault(); // FS Object default SSD
         Path usrdir = defaultfs.getPath(System.getProperty("user.dir"));
-        Path jarfile = Paths.get(usrdir.toString(), "SpaceNavigator.jar"); // path = /home/ron/tmp/orig
+        Path jarfile = Paths.get(usrdir.toString(), "GravitySimulator3D.jar"); // path = /home/ron/tmp/orig
         FileSystem jarfs = null; try { jarfs = FileSystems.newFileSystem(jarfile, null); } catch (IOException ex) { System.err.println(ex); } // FS jar file
         Path jarscenes = jarfs.getPath("rdj", "scenes");
         Path jarresources = jarfs.getPath("rdj", "resources");
 //        Path jarreadmesrc = jarfs.getPath("README.txt");
 //        Path jarreadmedst = defaultfs.getPath(System.getProperty("user.dir", "README.txt"));
 	
-	updatePreloaderProgress(0.3); notifyPreloader(new ErrorNotification("info","SpaceNavigator",new Throwable("copy scenes...")));
+	updatePreloaderProgress(0.3); notifyPreloader(new ErrorNotification("info","GravitySimulator3D",new Throwable("copy scenes...")));
         copyTree(jarscenes,usrdir);
-	updatePreloaderProgress(0.7); notifyPreloader(new ErrorNotification("info","SpaceNavigator",new Throwable("copy resources...")));
+	updatePreloaderProgress(0.7); notifyPreloader(new ErrorNotification("info","GravitySimulator3D",new Throwable("copy resources...")));
         copyTree(jarresources,usrdir);
 //	if (Files.notExists(jarreadmedst, NOFOLLOW_LINKS)) { try { Files.copy(jarreadmesrc, jarreadmedst); } catch (IOException ex) { System.err.println(ex); } }
 	
@@ -94,17 +96,17 @@ public class MainStage extends Application
     @Override public void start(Stage param) throws Exception 
     {
 	// Send progress to preloader
-	notifyPreloader(new ErrorNotification("info","SpaceNavigator",new Throwable("starting...")));
+	notifyPreloader(new ErrorNotification("info","GravitySimulator3D",new Throwable("starting...")));
 
 	stage = param;
-	stage.setTitle("Space Navigator");
+	stage.setTitle("GravitySimulator3D");
 	stage.initStyle(StageStyle.UNIFIED);
 	stage.setFullScreenExitKeyCombination(new KeyCodeCombination(KeyCode.ESCAPE, KeyCombination.SHIFT_DOWN));
 	stage.setFullScreenExitHint("<Shift-Esc> exit");
 	
 	initStage();
 	
-	notifyPreloader(new ErrorNotification("info","SpaceNavigator",new Throwable("loading SceneDisplay.fxml...")));
+	notifyPreloader(new ErrorNotification("info","GravitySimulator3D",new Throwable("loading SceneDisplay.fxml...")));
 	
 	// Loading the FXML SceneDisplayController
 	FXMLLoader fxmlLoader = new FXMLLoader();
@@ -120,12 +122,12 @@ public class MainStage extends Application
 	//2
 	superscene = new LoadScene(this, scenefile);
 
-	notifyPreloader(new ErrorNotification("info","SpaceNavigator",new Throwable("Loaded: " + superscene.getSceneId())));
+	notifyPreloader(new ErrorNotification("info","GravitySimulator3D",new Throwable("Loaded: " + superscene.getSceneId())));
 
 	//3
 	sceneDisplayController.setApp(this); // No default constructor, just this construction!
 
-	notifyPreloader(new ErrorNotification("info","SpaceNavigator",new Throwable(" creating: UI EventListeners")));
+	notifyPreloader(new ErrorNotification("info","GravitySimulator3D",new Throwable(" creating: UI EventListeners")));
 	setupEvents();
 	
 	setStageScene(superscene);

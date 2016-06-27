@@ -226,7 +226,7 @@ public class Node3D
 	    nodeIdMenuItemRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { nodeIdMenuItemRect.setFill(Color.rgb(255,255,255,0.5)); });
 	    nodeIdMenuItemRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) ->
 	    {
-		superscene.spacenavigator.getSceneDisplayController().disableMouseMovement(); 
+		superscene.mainstage.getSceneDisplayController().disableMouseMovement(); 
 		superscene.flipNodeSectionDisplayToBack(nodeFuntionsVBox);
 	    });
 	    nodeIdMenuItemRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { nodeIdMenuItemRect.setFill(Color.rgb(0,0,0,0.0)); });
@@ -251,7 +251,7 @@ public class Node3D
 	    HBox controlNodeHBox = new HBox(controlNodeStackPane); controlNodeHBox.setPrefWidth(130); controlNodeHBox.setPrefHeight(20); controlNodeHBox.setAlignment(Pos.CENTER);
 
 	    controlNodeRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { controlNodeRect.setFill(Color.rgb(255,255,255,0.5)); });
-	    controlNodeRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { superscene.switchControlNode(this); superscene.spacenavigator.getSceneDisplayController().disableMouseMovement(); });
+	    controlNodeRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { superscene.switchControlNode(this); superscene.mainstage.getSceneDisplayController().disableMouseMovement(); });
 	    controlNodeRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { controlNodeRect.setFill(Color.rgb(0,0,0,0.0)); });
 
 	    nodeFuntionsVBox.getChildren().add(controlNodeHBox);
@@ -265,7 +265,7 @@ public class Node3D
 
 		viewCameraRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { viewCameraRect.setFill(Color.rgb(255,255,255,0.5)); });
 		viewCameraRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> 
-		{ superscene.switchCameraNode((MyCamera) this); superscene.switchControlNode(this); superscene.spacenavigator.disableMouseMovement(); superscene.flipNodeSectionDisplayToFront(superscene.getNodeListVBox()); });
+		{ superscene.switchCameraNode((MyCamera) this); superscene.switchControlNode(this); superscene.mainstage.disableMouseMovement(); superscene.flipNodeSectionDisplayToFront(superscene.getNodeListVBox()); });
 
 		viewCameraRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { viewCameraRect.setFill(Color.rgb(0,0,0,0.0)); });
 
@@ -277,7 +277,7 @@ public class Node3D
 		HBox nodeZoomInHBox = new HBox(nodeZoomInStackPane); nodeZoomInHBox.setPrefWidth(130); nodeZoomInHBox.setPrefHeight(20); nodeZoomInHBox.setAlignment(Pos.CENTER);
 
 		nodeZoomInRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { nodeZoomInRect.setFill(Color.rgb(255,255,255,0.5)); });
-		nodeZoomInRect.addEventFilter(MouseEvent.MOUSE_PRESSED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { switchOnZoomIn(); superscene.spacenavigator.disableMouseMovement(); });
+		nodeZoomInRect.addEventFilter(MouseEvent.MOUSE_PRESSED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { switchOnZoomIn(); superscene.mainstage.disableMouseMovement(); });
 		nodeZoomInRect.addEventFilter(MouseEvent.MOUSE_RELEASED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { switchOffZoomIn(); });
 		nodeZoomInRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { nodeZoomInRect.setFill(Color.rgb(0,0,0,0.0)); });
 
@@ -289,7 +289,7 @@ public class Node3D
 		HBox nodeZoomOutHBox = new HBox(nodeZoomOutStackPane); nodeZoomOutHBox.setPrefWidth(130); nodeZoomOutHBox.setPrefHeight(20); nodeZoomOutHBox.setAlignment(Pos.CENTER);
 
 		nodeZoomOutRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { nodeZoomOutRect.setFill(Color.rgb(255,255,255,0.5)); });
-		nodeZoomOutRect.addEventFilter(MouseEvent.MOUSE_PRESSED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { switchOnZoomOut(); superscene.spacenavigator.disableMouseMovement(); });
+		nodeZoomOutRect.addEventFilter(MouseEvent.MOUSE_PRESSED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { switchOnZoomOut(); superscene.mainstage.disableMouseMovement(); });
 		nodeZoomOutRect.addEventFilter(MouseEvent.MOUSE_RELEASED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { switchOffZoomOut(); });
 		nodeZoomOutRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { nodeZoomOutRect.setFill(Color.rgb(0,0,0,0.0)); });
 
@@ -304,7 +304,7 @@ public class Node3D
 		HBox switchLightHBox = new HBox(switchLightStackPane); switchLightHBox.setPrefWidth(130); switchLightHBox.setPrefHeight(20); switchLightHBox.setAlignment(Pos.CENTER);
 
 		switchLightRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { switchLightRect.setFill(Color.rgb(255,255,255,0.5)); });
-		switchLightRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { switchLight(); superscene.spacenavigator.getSceneDisplayController().disableMouseMovement(); });
+		switchLightRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { switchLight(); superscene.mainstage.getSceneDisplayController().disableMouseMovement(); });
 		switchLightRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) ->  { switchLightRect.setFill(Color.rgb(0,0,0,0.0)); });
 
 		nodeFuntionsVBox.getChildren().add(switchLightHBox);
@@ -315,7 +315,7 @@ public class Node3D
 		HBox dropPLightHBox = new HBox(dropPLightStackPane); dropPLightHBox.setPrefWidth(130); dropPLightHBox.setPrefHeight(20); dropPLightHBox.setAlignment(Pos.CENTER);
 
 		dropPLightRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { dropPLightRect.setFill(Color.rgb(255,255,255,0.5)); });
-		dropPLightRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { dropPLight(); superscene.spacenavigator.getSceneDisplayController().disableMouseMovement(); });
+		dropPLightRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { dropPLight(); superscene.mainstage.getSceneDisplayController().disableMouseMovement(); });
 		dropPLightRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { dropPLightRect.setFill(Color.rgb(0,0,0,0.0)); });
 
 		nodeFuntionsVBox.getChildren().add(dropPLightHBox);
@@ -326,7 +326,7 @@ public class Node3D
 		HBox dropALightHBox = new HBox(dropALightStackPane); dropALightHBox.setPrefWidth(130); dropALightHBox.setPrefHeight(20); dropALightHBox.setAlignment(Pos.CENTER);
 
 		dropALightRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { dropALightRect.setFill(Color.rgb(255,255,255,0.5)); });
-		dropALightRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { dropALight(); superscene.spacenavigator.getSceneDisplayController().disableMouseMovement(); });
+		dropALightRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { dropALight(); superscene.mainstage.getSceneDisplayController().disableMouseMovement(); });
 		dropALightRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { dropALightRect.setFill(Color.rgb(0,0,0,0.0)); });
 
 		nodeFuntionsVBox.getChildren().add(dropALightHBox);
@@ -339,7 +339,7 @@ public class Node3D
 	    HBox dropSphereHBox = new HBox(dropSphereStackPane); dropSphereHBox.setPrefWidth(130); dropSphereHBox.setPrefHeight(20); dropSphereHBox.setAlignment(Pos.CENTER);
 
 	    dropSphereRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { dropSphereRect.setFill(Color.rgb(255,255,255,0.5)); });
-	    dropSphereRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { dropSphere(); superscene.spacenavigator.disableMouseMovement(); });
+	    dropSphereRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { dropSphere(); superscene.mainstage.disableMouseMovement(); });
 	    dropSphereRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { dropSphereRect.setFill(Color.rgb(0,0,0,0.0)); });
 
 	    nodeFuntionsVBox.getChildren().add(dropSphereHBox);
@@ -351,7 +351,7 @@ public class Node3D
 	    HBox dropSphereTrailHBox = new HBox(dropSphereTrailStackPane); dropSphereTrailHBox.setPrefWidth(130); dropSphereTrailHBox.setPrefHeight(20); dropSphereTrailHBox.setAlignment(Pos.CENTER);
 
 	    dropSphereTrailRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { dropSphereTrailRect.setFill(Color.rgb(255,255,255,0.5)); });
-	    dropSphereTrailRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { switchDropSphereTrail(); superscene.spacenavigator.disableMouseMovement(); });
+	    dropSphereTrailRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { switchDropSphereTrail(); superscene.mainstage.disableMouseMovement(); });
 	    dropSphereTrailRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { dropSphereTrailRect.setFill(Color.rgb(0,0,0,0.0)); });
 
 	    nodeFuntionsVBox.getChildren().add(dropSphereTrailHBox);
@@ -363,7 +363,7 @@ public class Node3D
 	    HBox createHSphereTrailHBox = new HBox(createHSphereTrailStackPane); createHSphereTrailHBox.setPrefWidth(130); createHSphereTrailHBox.setPrefHeight(20); createHSphereTrailHBox.setAlignment(Pos.CENTER);
 
 	    createHSphereTrailRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { createHSphereTrailRect.setFill(Color.rgb(255,255,255,0.5)); });
-	    createHSphereTrailRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { constructHyperSphere(); superscene.spacenavigator.disableMouseMovement(); });
+	    createHSphereTrailRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { constructHyperSphere(); superscene.mainstage.disableMouseMovement(); });
 	    createHSphereTrailRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { createHSphereTrailRect.setFill(Color.rgb(0,0,0,0.0)); });
 
 	    nodeFuntionsVBox.getChildren().add(createHSphereTrailHBox);
@@ -375,7 +375,7 @@ public class Node3D
 	    HBox dropHSphereHBox = new HBox(dropHSphereStackPane); dropHSphereHBox.setPrefWidth(130); dropHSphereHBox.setPrefHeight(20); dropHSphereHBox.setAlignment(Pos.CENTER);
 
 	    dropHSphereRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { dropHSphereRect.setFill(Color.rgb(255,255,255,0.5)); });
-	    dropHSphereRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { dropHyperSphere(); superscene.spacenavigator.disableMouseMovement(); });
+	    dropHSphereRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { dropHyperSphere(); superscene.mainstage.disableMouseMovement(); });
 	    dropHSphereRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { dropHSphereRect.setFill(Color.rgb(0,0,0,0.0)); });
 
 	    nodeFuntionsVBox.getChildren().add(dropHSphereHBox);
@@ -387,7 +387,7 @@ public class Node3D
 	    HBox dropHSphereTrailHBox = new HBox(dropHSphereTrailStackPane); dropHSphereTrailHBox.setPrefWidth(130); dropHSphereTrailHBox.setPrefHeight(20); dropHSphereTrailHBox.setAlignment(Pos.CENTER);
 
 	    dropHSphereTrailRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { dropHSphereTrailRect.setFill(Color.rgb(255,255,255,0.5)); });
-	    dropHSphereTrailRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { switchDropHyperSphereTrail(); superscene.spacenavigator.disableMouseMovement(); });
+	    dropHSphereTrailRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { switchDropHyperSphereTrail(); superscene.mainstage.disableMouseMovement(); });
 	    dropHSphereTrailRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { dropHSphereTrailRect.setFill(Color.rgb(0,0,0,0.0)); });
 
 	    nodeFuntionsVBox.getChildren().add(dropHSphereTrailHBox);
@@ -399,7 +399,7 @@ public class Node3D
 	    HBox visibleHBox = new HBox(visibleStackPane); visibleHBox.setPrefWidth(130); visibleHBox.setPrefHeight(20); visibleHBox.setAlignment(Pos.CENTER);
 
 	    visibleRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { visibleRect.setFill(Color.rgb(255,255,255,0.5)); });
-	    visibleRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { switchVisibility(); superscene.spacenavigator.disableMouseMovement(); });
+	    visibleRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { switchVisibility(); superscene.mainstage.disableMouseMovement(); });
 	    visibleRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { visibleRect.setFill(Color.rgb(0,0,0,0.0)); });
 
 	    nodeFuntionsVBox.getChildren().add(visibleHBox);
@@ -411,7 +411,7 @@ public class Node3D
 	    HBox cachingHBox = new HBox(cachingStackPane); cachingHBox.setPrefWidth(130); cachingHBox.setPrefHeight(20); cachingHBox.setAlignment(Pos.CENTER);
 
 	    cachingRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { cachingRect.setFill(Color.rgb(255,255,255,0.5)); });
-	    cachingRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { switchCaching(); superscene.spacenavigator.disableMouseMovement(); });
+	    cachingRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { switchCaching(); superscene.mainstage.disableMouseMovement(); });
 	    cachingRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { cachingRect.setFill(Color.rgb(0,0,0,0.0)); });
 
 	    nodeFuntionsVBox.getChildren().add(cachingHBox);
@@ -423,7 +423,7 @@ public class Node3D
 	    HBox switchMotionHBox = new HBox(switchMotionStackPane); switchMotionHBox.setPrefWidth(130); switchMotionHBox.setPrefHeight(20); switchMotionHBox.setAlignment(Pos.CENTER);
 
 	    switchMotionRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { switchMotionRect.setFill(Color.rgb(255,255,255,0.5)); });
-	    switchMotionRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { switchMotion(); superscene.spacenavigator.disableMouseMovement(); });
+	    switchMotionRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { switchMotion(); superscene.mainstage.disableMouseMovement(); });
 	    switchMotionRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { switchMotionRect.setFill(Color.rgb(0,0,0,0.0)); });
 	    setMotionLabelBold(motionEnabled); nodeFuntionsVBox.getChildren().add(switchMotionHBox);
 
@@ -434,7 +434,7 @@ public class Node3D
 	    HBox switchSteppingHBox = new HBox(switchSteppingStackPane); switchSteppingHBox.setPrefWidth(130); switchSteppingHBox.setPrefHeight(20); switchSteppingHBox.setAlignment(Pos.CENTER);
 
 	    switchSteppingRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { switchSteppingRect.setFill(Color.rgb(255,255,255,0.5)); });
-	    switchSteppingRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { switchStepping(); superscene.spacenavigator.disableMouseMovement(); });
+	    switchSteppingRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { switchStepping(); superscene.mainstage.disableMouseMovement(); });
 	    switchSteppingRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { switchSteppingRect.setFill(Color.rgb(0,0,0,0.0)); });
 	    setSteppingLabelBold(steppingEnabled); nodeFuntionsVBox.getChildren().add(switchSteppingHBox);
 
@@ -445,7 +445,7 @@ public class Node3D
 	    HBox switchGravityHBox = new HBox(switchGravityStackPane); switchGravityHBox.setPrefWidth(130); switchGravityHBox.setPrefHeight(20); switchGravityHBox.setAlignment(Pos.CENTER);
 
 	    switchGravityRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { switchGravityRect.setFill(Color.rgb(255,255,255,0.5)); });
-	    switchGravityRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { setSwitchGravityBold(getCelestial().switchGravitational()); superscene.spacenavigator.disableMouseMovement(); });
+	    switchGravityRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { setSwitchGravityBold(getCelestial().switchGravitational()); superscene.mainstage.disableMouseMovement(); });
 	    switchGravityRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { switchGravityRect.setFill(Color.rgb(0,0,0,0.0)); });
 	    setSwitchGravityBold(celestial.isGravitational()); nodeFuntionsVBox.getChildren().add(switchGravityHBox);
 
@@ -456,7 +456,7 @@ public class Node3D
 	    HBox switchCollisionsHBox = new HBox(switchCollisionsStackPane); switchCollisionsHBox.setPrefWidth(130); switchCollisionsHBox.setPrefHeight(20); switchCollisionsHBox.setAlignment(Pos.CENTER);
 
 	    switchCollisionsRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { switchCollisionsRect.setFill(Color.rgb(255,255,255,0.5)); });
-	    switchCollisionsRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { setSwitchCollisionalBold(getCelestial().switchCollisional()); superscene.spacenavigator.disableMouseMovement(); });
+	    switchCollisionsRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { setSwitchCollisionalBold(getCelestial().switchCollisional()); superscene.mainstage.disableMouseMovement(); });
 	    switchCollisionsRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { switchCollisionsRect.setFill(Color.rgb(0,0,0,0.0)); });
 	    setSwitchCollisionalBold(celestial.isGravitational()); nodeFuntionsVBox.getChildren().add(switchCollisionsHBox);
 
@@ -467,7 +467,7 @@ public class Node3D
 	    HBox switchShearHBox = new HBox(switchShearStackPane); switchShearHBox.setPrefWidth(130); switchShearHBox.setPrefHeight(20); switchShearHBox.setAlignment(Pos.CENTER);
 
 	    switchShearRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { switchShearRect.setFill(Color.rgb(255,255,255,0.5)); });
-	    switchShearRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { flipRotation(); superscene.spacenavigator.disableMouseMovement(); });
+	    switchShearRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { flipRotation(); superscene.mainstage.disableMouseMovement(); });
 	    switchShearRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { switchShearRect.setFill(Color.rgb(0,0,0,0.0)); });
 	    setSwitchShearBold(celestial.isGravitational()); nodeFuntionsVBox.getChildren().add(switchShearHBox);
 
@@ -478,7 +478,7 @@ public class Node3D
 	    HBox backupCoordinalHBox = new HBox(backupCoordinalStackPane); backupCoordinalHBox.setPrefWidth(130); backupCoordinalHBox.setPrefHeight(20); backupCoordinalHBox.setAlignment(Pos.CENTER);
 
 	    backupCoordinalRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { backupCoordinalRect.setFill(Color.rgb(255,255,255,0.5)); });
-	    backupCoordinalRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { backupCoordinalState(); superscene.spacenavigator.disableMouseMovement(); });
+	    backupCoordinalRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { backupCoordinalState(); superscene.mainstage.disableMouseMovement(); });
 	    backupCoordinalRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { backupCoordinalRect.setFill(Color.rgb(0,0,0,0.0)); });
 
 	    nodeFuntionsVBox.getChildren().add(backupCoordinalHBox);
@@ -490,7 +490,7 @@ public class Node3D
 	    HBox restoreCoordinalHBox = new HBox(restoreCoordinalStackPane); restoreCoordinalHBox.setPrefWidth(130); restoreCoordinalHBox.setPrefHeight(20); restoreCoordinalHBox.setAlignment(Pos.CENTER);
 
 	    restoreCoordinalRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { restoreCoordinalRect.setFill(Color.rgb(255,255,255,0.5)); });
-	    restoreCoordinalRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { restoreCoordinalState(); superscene.spacenavigator.disableMouseMovement(); });
+	    restoreCoordinalRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { restoreCoordinalState(); superscene.mainstage.disableMouseMovement(); });
 	    restoreCoordinalRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { restoreCoordinalRect.setFill(Color.rgb(0,0,0,0.0)); });
 
 	    nodeFuntionsVBox.getChildren().add(restoreCoordinalHBox);
@@ -504,7 +504,7 @@ public class Node3D
 	    nodeBackRect.addEventFilter(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { nodeBackRect.setFill(Color.rgb(255,255,255,0.5)); });
 	    nodeBackRect.addEventFilter(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> 
 	    {
-		superscene.spacenavigator.getSceneDisplayController().disableMouseMovement(); 
+		superscene.mainstage.getSceneDisplayController().disableMouseMovement(); 
 		superscene.flipNodeSectionDisplayToFront(superscene.getNodeListVBox());
 	    });
 	    nodeBackRect.addEventFilter(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) (MouseEvent mouseEvent) -> { nodeBackRect.setFill(Color.rgb(0,0,0,0.0)); });

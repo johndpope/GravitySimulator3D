@@ -24,7 +24,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
 import javafx.util.Duration;
 
-public	class SceneDisplayController extends Group implements Initializable // Gets shown in SpaceNavigator.setStageScene
+public	class SceneDisplayController extends Group implements Initializable // Gets shown in mainstage.setStageScene
 {
     @FXML	private		Rectangle	    displayRect;
     
@@ -78,7 +78,7 @@ public	class SceneDisplayController extends Group implements Initializable // Ge
 	    
     @FXML	private		Group		    rootGroup;
 
-    private	MainStage	    spacenavigator;
+    private	MainStage	    mainstage;
     private	String		    precision;
     protected	Rectangle2D	    rectangle2D;
     protected	double		    screenwidth, screenheight;
@@ -114,7 +114,7 @@ public	class SceneDisplayController extends Group implements Initializable // Ge
     public void setApp(MainStage param) // no default constructor, use this to set a caller reference and the rest
     {
 //	System.out.println("setApp");
-	spacenavigator = param;
+	mainstage = param;
 	
 	precision = "%.3f";
 
@@ -145,8 +145,8 @@ public	class SceneDisplayController extends Group implements Initializable // Ge
     public void loadScreen()
     {
 	rectangle2D = Screen.getPrimary().getVisualBounds();
-	screenwidth = spacenavigator.stage.getWidth();
-	screenheight = spacenavigator.stage.getHeight();
+	screenwidth = mainstage.stage.getWidth();
+	screenheight = mainstage.stage.getHeight();
 	rectangleWidth = displayRect.getWidth();
 	rectangleHeight = displayRect.getHeight();
 
@@ -155,11 +155,11 @@ public	class SceneDisplayController extends Group implements Initializable // Ge
     }
     
     public void refresh()			    { refreshTargetFrameRate();refreshRealFrameRate();refreshMotionRate();refreshMotionFactor();refreshGravityFactor();}
-    public void refreshTargetFrameRate()	    { frameRateLabel.setText(Double.toString(spacenavigator.superscene.targetFrameRate)); }
-    public void refreshRealFrameRate()		    { fpsLabel.setText(Double.toString(spacenavigator.superscene.realFrameRate)); }
-    public void refreshMotionRate()		    { motionRateLabel.setText(Double.toString(spacenavigator.superscene.getMotionRate())); }
-    public void refreshMotionFactor()		    { motionFactorLabel.setText(String.format(precision, spacenavigator.superscene.motionFactor)); }
-    public void refreshGravityFactor()		    { gravityFactorLabel.setText(String.format(precision, spacenavigator.superscene.gravityFactor)); }
+    public void refreshTargetFrameRate()	    { frameRateLabel.setText(Double.toString(mainstage.superscene.targetFrameRate)); }
+    public void refreshRealFrameRate()		    { fpsLabel.setText(Double.toString(mainstage.superscene.realFrameRate)); }
+    public void refreshMotionRate()		    { motionRateLabel.setText(Double.toString(mainstage.superscene.getMotionRate())); }
+    public void refreshMotionFactor()		    { motionFactorLabel.setText(String.format(precision, mainstage.superscene.motionFactor)); }
+    public void refreshGravityFactor()		    { gravityFactorLabel.setText(String.format(precision, mainstage.superscene.gravityFactor)); }
     
     public void showDisplay(boolean param)	    { showing = param; if (param) { rootGroup.setTranslateX(displayShowingBaseX);} else { rootGroup.setTranslateX(displayHidingBaseX); } rootGroup.setVisible(param); }
     public void showAnimateDisplay(boolean param)   { showing = param; if (param) { rootGroup.setVisible(showing); showTransition.play(); } else { hideTransition.play(); } }
@@ -171,14 +171,14 @@ public	class SceneDisplayController extends Group implements Initializable // Ge
     
     
     @FXML private void frameRateDecreaseOnMouseEntered(MouseEvent event)    {frameRateDecreaseRect.setFill(Color.rgb(255,255,255,0.5));}
-    @FXML private void frameRateDecreaseOnMouseClicked(MouseEvent event)    { if (spacenavigator.superscene.targetFrameRate > 0) { spacenavigator.superscene.targetFrameRate--; updateFrameRate(); } }
+    @FXML private void frameRateDecreaseOnMouseClicked(MouseEvent event)    { if (mainstage.superscene.targetFrameRate > 0) { mainstage.superscene.targetFrameRate--; updateFrameRate(); } }
     @FXML private void frameRateDecreaseOnMousePressed(MouseEvent event)
     {
 	if (! frameRateDecreaseMousePressed)
 	{
 	    frameRateDecreaseMousePressed = true; frameRateDecreaseTimer = new Timer(); frameRateDecreaseTimer.scheduleAtFixedRate(new TimerTask() {@Override public void run() { Platform.runLater(() -> 
 	    {
-		if ( spacenavigator.superscene.targetFrameRate>0 ) { spacenavigator.superscene.targetFrameRate--; } updateFrameRate();
+		if ( mainstage.superscene.targetFrameRate>0 ) { mainstage.superscene.targetFrameRate--; } updateFrameRate();
 	    }); }}, 250, 100);
 	}
     }
@@ -186,23 +186,23 @@ public	class SceneDisplayController extends Group implements Initializable // Ge
     @FXML private void frameRateDecreaseOnMouseExited(MouseEvent event)	    {frameRateDecreaseRect.setFill(Color.rgb(0,0,0,0.0));}
 //  ---------    
     @FXML private void frameRateRectOnMouseEntered(MouseEvent event)	    {frameRateRect.setFill(Color.rgb(255,255,255,0.5));}
-    @FXML private void frameRateRectOnMouseClicked(MouseEvent event)	    {if (event.getClickCount() == 1)    { spacenavigator.setEditing(true); frameRateTField.setText(Double.toString(spacenavigator.superscene.targetFrameRate)); frameRateLabel.setVisible(false); frameRateTField.setVisible(true); }}
+    @FXML private void frameRateRectOnMouseClicked(MouseEvent event)	    {if (event.getClickCount() == 1)    { mainstage.setEditing(true); frameRateTField.setText(Double.toString(mainstage.superscene.targetFrameRate)); frameRateLabel.setVisible(false); frameRateTField.setVisible(true); }}
     @FXML private void frameRateTFieldOnKeyPressed(KeyEvent event)
     {
-	if (event.getCode() == KeyCode.ESCAPE)	{ frameRateTField.setVisible(false); frameRateLabel.setVisible(true); spacenavigator.setEditing(false); }
-	if (event.getCode() == KeyCode.ENTER)	{ spacenavigator.superscene.targetFrameRate = Integer.parseInt(frameRateTField.getText()); frameRateTField.setVisible(false); frameRateLabel.setVisible(true); updateFrameRate(); spacenavigator.setEditing(false); }
+	if (event.getCode() == KeyCode.ESCAPE)	{ frameRateTField.setVisible(false); frameRateLabel.setVisible(true); mainstage.setEditing(false); }
+	if (event.getCode() == KeyCode.ENTER)	{ mainstage.superscene.targetFrameRate = Integer.parseInt(frameRateTField.getText()); frameRateTField.setVisible(false); frameRateLabel.setVisible(true); updateFrameRate(); mainstage.setEditing(false); }
     }
     @FXML private void frameRateRectOnMouseExited(MouseEvent event)	    {frameRateRect.setFill(Color.rgb(0,0,0,0.0));}
 //  ---------    
     @FXML private void frameRateIncreaseOnMouseEntered(MouseEvent event)    {frameRateIncreaseRect.setFill(Color.rgb(255,255,255,0.5));}
-    @FXML private void frameRateIncreaseOnMouseClicked(MouseEvent event)    {if ( spacenavigator.superscene.targetFrameRate<1000 ) { spacenavigator.superscene.targetFrameRate++; } updateFrameRate();}
+    @FXML private void frameRateIncreaseOnMouseClicked(MouseEvent event)    {if ( mainstage.superscene.targetFrameRate<1000 ) { mainstage.superscene.targetFrameRate++; } updateFrameRate();}
     @FXML private void frameRateIncreaseOnMousePressed(MouseEvent event)
     {
 	if (! frameRateIncreaseMousePressed)
 	{
 	    frameRateIncreaseMousePressed = true; frameRateIncreaseTimer = new Timer(); frameRateIncreaseTimer.scheduleAtFixedRate(new TimerTask() {@Override public void run() { Platform.runLater(() -> 
 	    {
-		if ( spacenavigator.superscene.targetFrameRate<1000 ) { spacenavigator.superscene.targetFrameRate++; } updateFrameRate();
+		if ( mainstage.superscene.targetFrameRate<1000 ) { mainstage.superscene.targetFrameRate++; } updateFrameRate();
 	    }); }}, 250, 100);
 	}
     }
@@ -214,14 +214,14 @@ public	class SceneDisplayController extends Group implements Initializable // Ge
     
 //  ---------
     @FXML   private void motionRateDecreaseOnMouseEntered(MouseEvent event)	{motionRateDecreaseRect.setFill(Color.rgb(255,255,255,0.5));}
-    @FXML   private void motionRateDecreaseOnMouseClicked(MouseEvent event)	{ if (spacenavigator.superscene.getMotionRate() > 0) { spacenavigator.superscene.setMotionRate(spacenavigator.superscene.getMotionRate()-1); updateMotionRate(); } }
+    @FXML   private void motionRateDecreaseOnMouseClicked(MouseEvent event)	{ if (mainstage.superscene.getMotionRate() > 0) { mainstage.superscene.setMotionRate(mainstage.superscene.getMotionRate()-1); updateMotionRate(); } }
     @FXML   private void motionRateDecreaseOnMousePressed(MouseEvent event)
     {
 	if (! motionRateDecreaseMousePressed)
 	{
 	    motionRateDecreaseMousePressed = true; motionRateDecreaseTimer = new Timer(); motionRateDecreaseTimer.scheduleAtFixedRate(new TimerTask() {@Override public void run() { Platform.runLater(() -> 
 	    {
-		if ( spacenavigator.superscene.getMotionRate()>0 ) { spacenavigator.superscene.setMotionRate(spacenavigator.superscene.getMotionRate()-1); } updateMotionRate();
+		if ( mainstage.superscene.getMotionRate()>0 ) { mainstage.superscene.setMotionRate(mainstage.superscene.getMotionRate()-1); } updateMotionRate();
 	    }); }}, 250, 100);
 	}
     }
@@ -229,23 +229,23 @@ public	class SceneDisplayController extends Group implements Initializable // Ge
     @FXML   private void motionRateDecreaseOnMouseExited(MouseEvent event)	{motionRateDecreaseRect.setFill(Color.rgb(0,0,0,0.0));}
 //  ---------        
     @FXML   private void motionRateRectOnMouseEntered(MouseEvent event)		{motionRateRect.setFill(Color.rgb(255,255,255,0.5));}
-    @FXML   private void motionRateRectOnMouseClicked(MouseEvent event)		{if (event.getClickCount() == 1)    { spacenavigator.setEditing(true); motionRateTField.setText(Double.toString(spacenavigator.superscene.getMotionRate())); motionRateLabel.setVisible(false); motionRateTField.setVisible(true); }}
+    @FXML   private void motionRateRectOnMouseClicked(MouseEvent event)		{if (event.getClickCount() == 1)    { mainstage.setEditing(true); motionRateTField.setText(Double.toString(mainstage.superscene.getMotionRate())); motionRateLabel.setVisible(false); motionRateTField.setVisible(true); }}
     @FXML   private void motionRateTFieldOnKeyPressed(KeyEvent event)
     {
-	if (event.getCode() == KeyCode.ESCAPE)	{ motionRateTField.setVisible(false); motionRateLabel.setVisible(true); spacenavigator.setEditing(false); }
-	if (event.getCode() == KeyCode.ENTER)	{ spacenavigator.superscene.setMotionRate(Integer.parseInt(motionRateTField.getText())); motionRateTField.setVisible(false); motionRateLabel.setVisible(true); updateMotionRate(); spacenavigator.setEditing(false); }
+	if (event.getCode() == KeyCode.ESCAPE)	{ motionRateTField.setVisible(false); motionRateLabel.setVisible(true); mainstage.setEditing(false); }
+	if (event.getCode() == KeyCode.ENTER)	{ mainstage.superscene.setMotionRate(Integer.parseInt(motionRateTField.getText())); motionRateTField.setVisible(false); motionRateLabel.setVisible(true); updateMotionRate(); mainstage.setEditing(false); }
     }
     @FXML   private void motionRateRectOnMouseExited(MouseEvent event)		{motionRateRect.setFill(Color.rgb(0,0,0,0.0));}
     
     @FXML   private void motionRateIncreaseOnMouseEntered(MouseEvent event)	{motionRateIncreaseRect.setFill(Color.rgb(255,255,255,0.5));}
-    @FXML   private void motionRateIncreaseOnMouseClicked(MouseEvent event)	{if ( spacenavigator.superscene.getMotionRate()<1000 ) { spacenavigator.superscene.setMotionRate(spacenavigator.superscene.getMotionRate()+1); } updateMotionRate();}
+    @FXML   private void motionRateIncreaseOnMouseClicked(MouseEvent event)	{if ( mainstage.superscene.getMotionRate()<1000 ) { mainstage.superscene.setMotionRate(mainstage.superscene.getMotionRate()+1); } updateMotionRate();}
     @FXML   private void motionRateIncreaseOnMousePressed(MouseEvent event)
     {
 	if (! motionRateIncreaseMousePressed)
 	{
 	    motionRateIncreaseMousePressed = true; motionRateIncreaseTimer = new Timer(); motionRateIncreaseTimer.scheduleAtFixedRate(new TimerTask() {@Override public void run() { Platform.runLater(() -> 
 	    {
-		if ( spacenavigator.superscene.getMotionRate()<1000 ) { spacenavigator.superscene.setMotionRate(spacenavigator.superscene.getMotionRate()+1); } updateMotionRate();
+		if ( mainstage.superscene.getMotionRate()<1000 ) { mainstage.superscene.setMotionRate(mainstage.superscene.getMotionRate()+1); } updateMotionRate();
 	    }); }}, 250, 100);
 	}
     }
@@ -257,14 +257,14 @@ public	class SceneDisplayController extends Group implements Initializable // Ge
     
 //  ---------
     @FXML private void motionFactorDecreaseOnMouseEntered(MouseEvent event) {motionFactorDecreaseRect.setFill(Color.rgb(255,255,255,0.5));}
-    @FXML private void motionFactorDecreaseOnMouseClicked(MouseEvent event) {spacenavigator.superscene.motionFactor /= 1.1; updateMotionFactor();}
+    @FXML private void motionFactorDecreaseOnMouseClicked(MouseEvent event) {mainstage.superscene.motionFactor /= 1.1; updateMotionFactor();}
     @FXML private void motionFactorDecreaseOnMousePressed(MouseEvent event)
     {
 	if (! motionFactorDecreaseMousePressed)
 	{
 	    motionFactorDecreaseMousePressed = true; motionFactorDecreaseTimer = new Timer(); motionFactorDecreaseTimer.scheduleAtFixedRate(new TimerTask() {@Override public void run() { Platform.runLater(() -> 
 	    {
-		spacenavigator.superscene.motionFactor /= 1.1;
+		mainstage.superscene.motionFactor /= 1.1;
 		updateMotionFactor();
 	    }); }}, 250, 100);
 	}
@@ -274,24 +274,24 @@ public	class SceneDisplayController extends Group implements Initializable // Ge
     @FXML private void motionFactorDecreaseOnMouseExited(MouseEvent event)		{motionFactorDecreaseRect.setFill(Color.rgb(0,0,0,0.0));}
 //  ---------    
     @FXML private void motionFactorRectOnMouseEntered(MouseEvent event)		{motionFactorRect.setFill(Color.rgb(255,255,255,0.5));}
-    @FXML private void motionFactorRectOnMouseClicked(MouseEvent event)		{ if (event.getClickCount() == 1)	{ spacenavigator.setEditing(true); motionFactorTField.setText(Double.toString(spacenavigator.superscene.motionFactor)); motionFactorLabel.setVisible(false); motionFactorTField.setVisible(true); }}
+    @FXML private void motionFactorRectOnMouseClicked(MouseEvent event)		{ if (event.getClickCount() == 1)	{ mainstage.setEditing(true); motionFactorTField.setText(Double.toString(mainstage.superscene.motionFactor)); motionFactorLabel.setVisible(false); motionFactorTField.setVisible(true); }}
     @FXML private void motionFactorTFieldOnKeyPressed(KeyEvent event)
     {
-	if (event.getCode() == KeyCode.ESCAPE)	{ motionFactorTField.setVisible(false); motionFactorLabel.setVisible(true); spacenavigator.setEditing(false); }
-	if (event.getCode() == KeyCode.ENTER)	{ spacenavigator.superscene.motionFactor = Double.parseDouble(motionFactorTField.getText()); motionFactorTField.setVisible(false); motionFactorLabel.setVisible(true); updateMotionFactor(); spacenavigator.setEditing(false); }
+	if (event.getCode() == KeyCode.ESCAPE)	{ motionFactorTField.setVisible(false); motionFactorLabel.setVisible(true); mainstage.setEditing(false); }
+	if (event.getCode() == KeyCode.ENTER)	{ mainstage.superscene.motionFactor = Double.parseDouble(motionFactorTField.getText()); motionFactorTField.setVisible(false); motionFactorLabel.setVisible(true); updateMotionFactor(); mainstage.setEditing(false); }
     }
     @FXML private void motionFactorRectOnMouseExited(MouseEvent event)		{motionFactorRect.setFill(Color.rgb(0,0,0,0.0));}
 
 //  ---------    
     @FXML private void motionFactorIncreaseOnMouseEntered(MouseEvent event)		{motionFactorIncreaseRect.setFill(Color.rgb(255,255,255,0.5));}
-    @FXML private void motionFactorIncreaseOnMouseClicked(MouseEvent event)		{spacenavigator.superscene.motionFactor *= 1.1; updateMotionFactor();}
+    @FXML private void motionFactorIncreaseOnMouseClicked(MouseEvent event)		{mainstage.superscene.motionFactor *= 1.1; updateMotionFactor();}
     @FXML private void motionFactorIncreaseOnMousePressed(MouseEvent event)
     {
 	if (! motionFactorIncreaseMousePressed)
 	{
 	    motionFactorIncreaseMousePressed = true; motionFactorIncreaseTimer = new Timer(); motionFactorIncreaseTimer.scheduleAtFixedRate(new TimerTask() {@Override public void run() { Platform.runLater(() -> 
 	    {
-		spacenavigator.superscene.motionFactor *= 1.1;
+		mainstage.superscene.motionFactor *= 1.1;
 		updateMotionFactor();
 	    }); }}, 250, 100);
 	}
@@ -305,14 +305,14 @@ public	class SceneDisplayController extends Group implements Initializable // Ge
     
 //  =========    
     @FXML private void gravityFactorDecreaseOnMouseEntered(MouseEvent event){gravityFactorDecreaseRect.setFill(Color.rgb(255,255,255,0.5));}
-    @FXML private void gravityFactorDecreaseOnMouseClicked(MouseEvent event){spacenavigator.superscene.gravityFactor /= 1.1; updateGravityFactor();}
+    @FXML private void gravityFactorDecreaseOnMouseClicked(MouseEvent event){mainstage.superscene.gravityFactor /= 1.1; updateGravityFactor();}
     @FXML    private    void gravityFactorDecreaseOnMousePressed(MouseEvent event)
     {
 	if (! gravityFactorDecreaseMousePressed)
 	{
 	    gravityFactorDecreaseMousePressed = true; gravityFactorDecreaseTimer = new Timer(); gravityFactorDecreaseTimer.scheduleAtFixedRate(new TimerTask() {@Override public void run() { Platform.runLater(() -> 
 	    {
-		spacenavigator.superscene.gravityFactor /= 1.1;
+		mainstage.superscene.gravityFactor /= 1.1;
 		updateGravityFactor();
 	    }); }}, 250, 100);
 	}
@@ -321,23 +321,23 @@ public	class SceneDisplayController extends Group implements Initializable // Ge
     @FXML private void gravityFactorDecreaseOnMouseExited(MouseEvent event)		    {gravityFactorDecreaseRect.setFill(Color.rgb(0,0,0,0.0));}
 //  ---------    
     @FXML private void gravityFactorRectOnMouseEntered(MouseEvent event)		    {gravityFactorRect.setFill(Color.rgb(255,255,255,0.5));}
-    @FXML private void gravityFactorRectOnMouseClicked(MouseEvent event)		    {if (event.getClickCount() == 1)	{ spacenavigator.setEditing(true); gravityFactorTField.setText(Double.toString(spacenavigator.superscene.gravityFactor)); gravityFactorLabel.setVisible(false); gravityFactorTField.setVisible(true); }}
+    @FXML private void gravityFactorRectOnMouseClicked(MouseEvent event)		    {if (event.getClickCount() == 1)	{ mainstage.setEditing(true); gravityFactorTField.setText(Double.toString(mainstage.superscene.gravityFactor)); gravityFactorLabel.setVisible(false); gravityFactorTField.setVisible(true); }}
     @FXML private void gravityFactorTFieldOnKeyPressed(KeyEvent event)
     {
-	if (event.getCode() == KeyCode.ESCAPE)	{ gravityFactorTField.setVisible(false); gravityFactorLabel.setVisible(true); spacenavigator.setEditing(false); }
-	if (event.getCode() == KeyCode.ENTER)	{ spacenavigator.superscene.gravityFactor = Double.parseDouble(gravityFactorTField.getText()); gravityFactorTField.setVisible(false); gravityFactorLabel.setVisible(true); updateGravityFactor(); spacenavigator.setEditing(false); }
+	if (event.getCode() == KeyCode.ESCAPE)	{ gravityFactorTField.setVisible(false); gravityFactorLabel.setVisible(true); mainstage.setEditing(false); }
+	if (event.getCode() == KeyCode.ENTER)	{ mainstage.superscene.gravityFactor = Double.parseDouble(gravityFactorTField.getText()); gravityFactorTField.setVisible(false); gravityFactorLabel.setVisible(true); updateGravityFactor(); mainstage.setEditing(false); }
     }
     @FXML private void gravityFactorRectOnMouseExited(MouseEvent event)		    {gravityFactorRect.setFill(Color.rgb(0,0,0,0.0));}
 //  ---------    
     @FXML private void gravityFactorIncreaseOnMouseEntered(MouseEvent event)	    {gravityFactorIncreaseRect.setFill(Color.rgb(255,255,255,0.5));}
-    @FXML private void gravityFactorIncreaseOnMouseClicked(MouseEvent event)	    {spacenavigator.superscene.gravityFactor *= 1.1; updateGravityFactor();}
+    @FXML private void gravityFactorIncreaseOnMouseClicked(MouseEvent event)	    {mainstage.superscene.gravityFactor *= 1.1; updateGravityFactor();}
     @FXML private void gravityFactorIncreaseOnMousePressed(MouseEvent event)
     {
 	if (! gravityFactorIncreaseMousePressed)
 	{
 	    gravityFactorIncreaseMousePressed = true; gravityFactorIncreaseTimer = new Timer(); gravityFactorIncreaseTimer.scheduleAtFixedRate(new TimerTask() {@Override public void run() { Platform.runLater(() -> 
 	    {
-		spacenavigator.superscene.gravityFactor *= 1.1;
+		mainstage.superscene.gravityFactor *= 1.1;
 		updateGravityFactor();
 	    }); }}, 250, 100);
 	}
@@ -347,19 +347,19 @@ public	class SceneDisplayController extends Group implements Initializable // Ge
     @FXML private void gravityFactorIncreaseOnMouseExited(MouseEvent event)     {gravityFactorIncreaseRect.setFill(Color.rgb(0,0,0,0.0));}
 //  =========    
 
-    public void distributeFrameRate()			    {spacenavigator.superscene.cancelTranslationTimer(); spacenavigator.superscene.createTranslationTimer();}
-    public void distributeMotionRate()			    {spacenavigator.superscene.cancelMotionTimer(); spacenavigator.superscene.updateMotionRate2Motion(spacenavigator.superscene.getLastMotionRateFactor()); spacenavigator.superscene.createMotionTimer();}
-    public void distributeMotionFactor()		    {spacenavigator.superscene.setMotionFactorForAllMotionStateChangeableNodes();}
-//    public void distributeGravityFactor()		    {spacenavigator.superscene.setGravityFactorForAllMotionStateChangeableNodes();}
+    public void distributeFrameRate()			    {mainstage.superscene.cancelTranslationTimer(); mainstage.superscene.createTranslationTimer();}
+    public void distributeMotionRate()			    {mainstage.superscene.cancelMotionTimer(); mainstage.superscene.updateMotionRate2Motion(mainstage.superscene.getLastMotionRateFactor()); mainstage.superscene.createMotionTimer();}
+    public void distributeMotionFactor()		    {mainstage.superscene.setMotionFactorForAllMotionStateChangeableNodes();}
+//    public void distributeGravityFactor()		    {mainstage.superscene.setGravityFactorForAllMotionStateChangeableNodes();}
 
     public   Group getRootGroup()			    {return rootGroup;}
 
-//    public void disableMouseMovement()			    {spacenavigator.stage.removeEventFilter(MouseEvent.MOUSE_MOVED, spacenavigator.mouseMovedHandler); spacenavigator.superscene.subScene.setCursor(Cursor.DEFAULT);}
-    @FXML   public void disableMouseMovement()		    {spacenavigator.disableMouseMovement();}
+//    public void disableMouseMovement()			    {mainstage.stage.removeEventFilter(MouseEvent.MOUSE_MOVED, mainstage.mouseMovedHandler); mainstage.superscene.subScene.setCursor(Cursor.DEFAULT);}
+    @FXML   public void disableMouseMovement()		    {mainstage.disableMouseMovement();}
     private void disableMouseMove(MouseEvent event)	    {disableMouseMovement();}
     
 
-    public   double getFrameRate()			{return spacenavigator.superscene.targetFrameRate;}
+    public   double getFrameRate()			{return mainstage.superscene.targetFrameRate;}
 //    public   void   setFrameRate(double frameRate)	{this.frameRate = frameRate; frameRateLabel.setText(Double.toString(this.frameRate)); }
 
     public   VBox getNodesVBox()		{return nodesVBox;}
