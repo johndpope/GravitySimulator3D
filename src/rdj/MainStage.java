@@ -68,7 +68,7 @@ public class MainStage extends Application
 
     @Override public void init() 
     {
-	major = 1; minor = 8; update = 3; version = "v" + major + "." + minor + "." + update;
+	major = 2; minor = 0; update = 0; version = "v" + major + "." + minor + "." + update;
 	notifyPreloader(new ErrorNotification("progress","show",new Throwable("")));
 	notifyPreloader(new ErrorNotification("application","title",new Throwable("GravitySimulator3D " + version)));
         notifyPreloader(new Preloader.StateChangeNotification(StateChangeNotification.Type.BEFORE_INIT));
