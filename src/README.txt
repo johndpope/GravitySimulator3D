@@ -1,7 +1,7 @@
 Usage:
 
-java -jar SpaceNavigator.jar
-java -jar SpaceNavigator.jar filename.scene
+java -jar GravitySimulator3D.jar
+java -jar GravitySimulator3D.jar filename.scene
 
 The scene files can be found in de directory: "rdj/scenes/"
 
