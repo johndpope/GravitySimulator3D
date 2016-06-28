@@ -1,3 +1,5 @@
+# browser.scene functions as a startmenu scene from where you can select other scenes
+#
 ################## General Settings ####################
 #
 Begin = General Settings

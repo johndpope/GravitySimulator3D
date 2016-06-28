@@ -1,4 +1,4 @@
-# Celestials
+# Celestials (physical properties ) can be predefined in this file, so you can refer to only the celestial name inside the scene files
 #
 Begin = General Settings
 GravitationalConstant = 6.673e-11

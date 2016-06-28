@@ -1,3 +1,5 @@
+# moon.scene demonstrates a moon (non orbital) freefall to earth
+#
 ################## General Settings ####################
 #
 Begin = General Settings

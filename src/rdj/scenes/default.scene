@@ -1,3 +1,5 @@
+# default.scene is the default loaded scene (in this case a copy of browser.scene)
+#
 ################## General Settings ####################
 #
 Begin = General Settings

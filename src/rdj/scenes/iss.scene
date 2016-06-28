@@ -1,3 +1,5 @@
+# iss.scene demonstrates an ISS freefall to earth (from a much greater altitude than it's real altitude)
+#
 ################## General Settings ####################
 #
 Begin = General Settings
