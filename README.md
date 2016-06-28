@@ -5,4 +5,5 @@ It all starts with:
 
 MainStage -> LoadScene (extends SuperScene) -> Node3D (MyCam, MySphere, MyThis, MyThat, bla, bla).
 
+Don't forget to read up on the JavaFX 8 3D chapter.
 Now that you're up to speed with it, good luck ;-)
