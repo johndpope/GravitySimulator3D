@@ -22,8 +22,8 @@ SceneColor = BLACK
 SceneId = Wave Patterns Scene
 SceneTargetFrameRate = 0 # 0 = no delay, >0 = fixed targetframerate
 SceneMotionRate = 100 # Range = 0-1000
-SceneMotionFactor = 10
-SceneGravityFactor = 10
+SceneMotionFactor = 5
+SceneGravityFactor = 5
 StartsWithDisplays = True
 StartsWithMotion = True
 End = General Settings
