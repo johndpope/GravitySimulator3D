@@ -33,10 +33,16 @@ import java.nio.file.attribute.UserPrincipal;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.Set;
+import static rdj.MyNIO.getDefaultFS;
 
 public class MyNIO
 {
-    private    	static int		    verbosity = 1;
+    private static int		verbosity = 1;
+    
+    public  static FileSystem	getDefaultFS() { return FileSystems.getDefault(); } // FS Object default SSD
+    public  static Path		getUserDir() { return getDefaultFS().getPath(System.getProperty("user.dir")); }
+    public  static Path		getJarFile() { return Paths.get(getUserDir().toString(), "GravitySimulator3D.jar"); }
+    public  static FileSystem	getJarFS() throws IOException { return FileSystems.newFileSystem(getJarFile(), null); }
 
     public static void listTree(Path source)
     {

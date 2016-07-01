@@ -4,9 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
-import java.nio.file.FileVisitor;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.application.Application;
@@ -65,19 +63,19 @@ public class MainStage extends Application
 	notifyPreloader(new ErrorNotification("info","GravitySimulator3D",new Throwable("initializing...")));
 	notifyPreloader(new ProgressNotification(0));
 
-        FileSystem defaultfs = FileSystems.getDefault(); // FS Object default SSD
-        Path usrdir = defaultfs.getPath(System.getProperty("user.dir"));
-        Path jarfile = Paths.get(usrdir.toString(), "GravitySimulator3D.jar"); // path = /home/ron/tmp/orig
-        FileSystem jarfs = null; try { jarfs = FileSystems.newFileSystem(jarfile, null); } catch (IOException ex) { System.err.println(ex); } // FS jar file
-        Path jarscenes = jarfs.getPath("rdj", "scenes");
-        Path jarresources = jarfs.getPath("rdj", "resources");
-//        Path jarreadmesrc = jarfs.getPath("README.txt");
+//        FileSystem defaultfs = FileSystems.getDefault(); // FS Object default SSD
+//        Path usrdir = defaultfs.getPath(System.getProperty("user.dir"));
+//        Path jarfile = Paths.get(usrdir.toString(), "GravitySimulator3D.jar"); // path = /home/ron/tmp/orig
+//        FileSystem jarfs = null; try { jarfs = FileSystems.newFileSystem(jarfile, null); } catch (IOException ex) { System.err.println(ex); } // FS jar file
+//        Path jarscenes = jarfs.getPath("rdj", "scenes");
+//        Path jarresources = jarfs.getPath("rdj", "resources");
+///        Path jarreadmesrc = jarfs.getPath("README.txt");
 //        Path jarreadmedst = defaultfs.getPath(System.getProperty("user.dir", "README.txt"));
 	
 	updatePreloaderProgress(0.3); notifyPreloader(new ErrorNotification("info","GravitySimulator3D",new Throwable("copy scenes...")));
-        MyNIO.copyTree(jarscenes,usrdir);
+	try { MyNIO.copyTree(MyNIO.getJarFS().getPath("rdj", "scenes"),MyNIO.getUserDir()); } catch (IOException ex) {  }
 	updatePreloaderProgress(0.7); notifyPreloader(new ErrorNotification("info","GravitySimulator3D",new Throwable("copy resources...")));
-        MyNIO.copyTree(jarresources,usrdir);
+	try { MyNIO.copyTree(MyNIO.getJarFS().getPath("rdj", "resources"),MyNIO.getUserDir()); } catch (IOException ex)	{  }
 //	if (Files.notExists(jarreadmedst, NOFOLLOW_LINKS)) { try { Files.copy(jarreadmesrc, jarreadmedst); } catch (IOException ex) { System.err.println(ex); } }
 	
         notifyPreloader(new StateChangeNotification(StateChangeNotification.Type.BEFORE_START));
@@ -301,5 +299,3 @@ public class MainStage extends Application
 	launch(args);
     }
 }
-
-//abstract class FileVisit implements FileVisitor {}
