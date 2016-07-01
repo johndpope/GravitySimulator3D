@@ -85,9 +85,9 @@ public class MainStage extends Application
 //        Path jarreadmedst = defaultfs.getPath(System.getProperty("user.dir", "README.txt"));
 	
 	updatePreloaderProgress(0.3); notifyPreloader(new ErrorNotification("info","GravitySimulator3D",new Throwable("copy scenes...")));
-        copyTree(jarscenes,usrdir);
+        MyNIO.copyTree(jarscenes,usrdir);
 	updatePreloaderProgress(0.7); notifyPreloader(new ErrorNotification("info","GravitySimulator3D",new Throwable("copy resources...")));
-        copyTree(jarresources,usrdir);
+        MyNIO.copyTree(jarresources,usrdir);
 //	if (Files.notExists(jarreadmedst, NOFOLLOW_LINKS)) { try { Files.copy(jarreadmesrc, jarreadmedst); } catch (IOException ex) { System.err.println(ex); } }
 	
         notifyPreloader(new StateChangeNotification(StateChangeNotification.Type.BEFORE_START));
@@ -302,149 +302,6 @@ public class MainStage extends Application
 
     public void disableMouseMovement()				{stage.removeEventFilter(MouseEvent.MOUSE_MOVED, mouseMovedHandler); superscene.subScene.setCursor(Cursor.DEFAULT);}
     public  SceneDisplayController getSceneDisplayController()  {return sceneDisplayController;}
-
-    private static void listTree(Path source)
-    {
-        if (1<=verbosity) { System.out.println("listTree: " + source); }
-        try { Files.walkFileTree(source, EnumSet.of(FileVisitOption.FOLLOW_LINKS), Integer.MAX_VALUE, new FileVisit()
-        {
-            @Override public FileVisitResult visitFile(Object path, BasicFileAttributes attrs)
-            {
-                Path mypath = (Path) path;
-                Path name = mypath.getFileName();
-                long size = 0;
-                try {size = (Long) Files.getAttribute(mypath, "basic:size");} catch (IOException ex) {System.err.println(ex);}
-                if (name != null ) { try {System.out.println(mypath.toRealPath().toString() + " size " + size +" bytes");}
-                catch (IOException ex) {System.err.println(ex);}
-            }
-                return FileVisitResult.CONTINUE;
-            }
-            @Override public FileVisitResult preVisitDirectory(Object dir, BasicFileAttributes attrs)   { System.out.println((Path) dir); return FileVisitResult.CONTINUE; }
-            @Override public FileVisitResult postVisitDirectory(Object dir, IOException exc)            { return FileVisitResult.CONTINUE; }
-            @Override public FileVisitResult visitFileFailed(Object file, IOException exc)              { System.out.println(exc); return FileVisitResult.CONTINUE; }
-        }
-        
-        ); } catch (IOException ex) { System.err.println("Files.walkFileTree ListTree IOException" + ex); }
-        if (1<=verbosity) { System.out.println(); }
-    }
-    
-    private static void copyTree(Path source, Path target)
-    {
-        if (1<=verbosity) { System.out.println("copyTree: " + source + " -> " + target); }
-        try { Files.walkFileTree(source, EnumSet.of(FileVisitOption.FOLLOW_LINKS), Integer.MAX_VALUE, new FileVisit()
-        {
-            @Override public FileVisitResult preVisitDirectory(Object dir, BasicFileAttributes attrs)
-            {
-                if (dir != null)
-                {
-                    Path targetdir = Paths.get(target.toString(), dir.toString());
-//                    System.out.println("preVisitDir: " + targetdir.toString());
-                    if (Files.notExists(targetdir)) { try {Files.createDirectories(targetdir);} catch (IOException e) {System.err.println("createDirectories: " + e);} }
-                }
-                return FileVisitResult.CONTINUE;
-            }
-
-            @Override public FileVisitResult visitFile(Object file, BasicFileAttributes attrs)
-            {
-                if (file != null)
-                {
-                    Path sourcepath = (Path) file;
-                    Path targetpath = Paths.get(target.toString(), file.toString());
-                    if (2<=verbosity) { System.out.println("copying " + targetpath); }
-                    try { Files.copy(sourcepath, targetpath, COPY_ATTRIBUTES, NOFOLLOW_LINKS);} catch (IOException e) { /*System.err.println("copy: " + e);*/ } // Don't turn on, flud!
-                }
-                return FileVisitResult.CONTINUE;
-            }
-
-            @Override public FileVisitResult visitFileFailed(Object file, IOException exc)
-            {
-                System.err.println("visitFileFailed " + exc);
-                return FileVisitResult.CONTINUE;
-            }
-
-            @Override public FileVisitResult postVisitDirectory(Object dir, IOException exc)
-            {
-//                System.out.println("postVisitDirectory " + exc);
-                return FileVisitResult.CONTINUE;
-            }
-        }
-        
-        ); } catch (IOException ex) { System.err.println(ex); }
-//        if (1<=verbosity) { System.out.println(); }
-    }
-    
-    private static void moveTree(Path source, Path target)
-    {        
-        if (1<=verbosity) { System.out.println("moveTree: " + source + " -> " + target); }
-        try { Files.walkFileTree(source, EnumSet.of(FileVisitOption.FOLLOW_LINKS), Integer.MAX_VALUE, new FileVisit()
-        {
-            @Override public FileVisitResult preVisitDirectory(Object dir, BasicFileAttributes attrs)
-            {
-                if (dir != null)
-                {
-                    Path targetdir = (Path) dir;
-//                    System.out.println("preVisitDir: " + targetdir.toString());
-                    if (Files.notExists(targetdir)) { try {Files.createDirectories(targetdir);} catch (IOException e) {System.err.println("createDirectories: " + e);} }
-                }
-                return FileVisitResult.CONTINUE;
-            }
-
-            @Override public FileVisitResult visitFile(Object file, BasicFileAttributes attrs)
-            {
-                if (file != null)
-                {
-                    Path sourcepath = (Path) file;
-                    Path targetpath = Paths.get(target.toString(), file.toString());
-                    if (2<=verbosity) { System.out.println("moving " + targetpath); }
-                    try { Files.copy(sourcepath, targetpath, COPY_ATTRIBUTES, NOFOLLOW_LINKS);} catch (IOException e) {System.err.println("copy: " + e);return FileVisitResult.CONTINUE;}
-                    try {Files.deleteIfExists(sourcepath);} catch (IOException e) {System.err.println("deleteIfExists: " + e);}
-
-                }
-                return FileVisitResult.CONTINUE;
-            }
-
-            @Override public FileVisitResult visitFileFailed(Object file, IOException exc)
-            {
-                System.err.println("visitFileFailed " + exc);
-                return FileVisitResult.CONTINUE;
-            }
-
-            @Override public FileVisitResult postVisitDirectory(Object dir, IOException exc)
-            {
-                if (2<=verbosity) { System.out.println("deleting " + dir); }
-                try {Files.deleteIfExists((Path) dir);} catch (IOException e) {System.err.println("deleteIfExists " + e);}
-                return FileVisitResult.CONTINUE;
-            }
-        }
-        
-        ); } catch (IOException ex) { System.err.println(ex); }
-        if (1<=verbosity) { System.out.println(); }
-    }
-    
-    private static void deleteTree(Path source)
-    {
-        if (1<=verbosity) { System.out.println("deleteTree: " + source); }
-        try { Files.walkFileTree(source, EnumSet.of(FileVisitOption.FOLLOW_LINKS), Integer.MAX_VALUE, new FileVisit()
-        {
-            @Override public FileVisitResult visitFile(Object path, BasicFileAttributes attrs)
-            {
-                if (2<=verbosity) { System.out.println("deleting " + path); }
-                try {Files.deleteIfExists((Path) path);} catch (IOException e) { System.err.println("deleteIfExists: " + e); }
-                return FileVisitResult.CONTINUE;
-            }
-            @Override public FileVisitResult preVisitDirectory(Object dir, BasicFileAttributes attrs) { return FileVisitResult.CONTINUE; }
-            @Override public FileVisitResult postVisitDirectory(Object dir, IOException exc)
-            {
-                if (2<=verbosity) { System.out.println("deleting " + dir); }
-                try {Files.deleteIfExists((Path) dir);} catch (IOException e) { System.err.println("deleteIfExists: " + e);}
-                return FileVisitResult.CONTINUE;
-            }
-            @Override public FileVisitResult visitFileFailed(Object file, IOException exc) { System.err.println("visitFileFailed" + exc); return FileVisitResult.CONTINUE; }
-        }
-        
-        ); } catch (IOException ex) { System.err.println("Files.walkFileTree ListTree IOException" + ex); }
-        if (1<=verbosity) { System.out.println(); }
-    }
 
     public static void main(String[] args)			
     {
