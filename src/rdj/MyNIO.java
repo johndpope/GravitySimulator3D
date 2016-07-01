@@ -33,7 +33,6 @@ import java.nio.file.attribute.UserPrincipal;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.Set;
-import static rdj.MyNIO.getDefaultFS;
 
 public class MyNIO
 {
