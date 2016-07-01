@@ -10,6 +10,7 @@ import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.FileVisitOption;
 import java.nio.file.FileVisitResult;
+import java.nio.file.FileVisitor;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import static java.nio.file.LinkOption.NOFOLLOW_LINKS;
@@ -33,10 +34,6 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.Set;
 
-/**
- *
- * @author ron
- */
 public class MyNIO
 {
     private    	static int		    verbosity = 1;
@@ -44,6 +41,7 @@ public class MyNIO
     public static void listTree(Path source)
     {
         if (1<=verbosity) { System.out.println("listTree: " + source); }
+	
         try { Files.walkFileTree(source, EnumSet.of(FileVisitOption.FOLLOW_LINKS), Integer.MAX_VALUE, new FileVisit()
         {
             @Override public FileVisitResult visitFile(Object path, BasicFileAttributes attrs)
@@ -480,6 +478,5 @@ public class MyNIO
         Path newsubdir = Paths.get(newdir.toString(), "subdir2");
         if (Files.notExists(newsubdir)) { try {Files.createDirectory(newsubdir);} catch (IOException e) {System.err.println(e);} }
     }
-
-
 }
+abstract class FileVisit implements FileVisitor {}
