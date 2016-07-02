@@ -11,4 +11,5 @@ MainStage -> LoadScene (extends SuperScene) -> Node3D (MyCam, MySphere, MyThis, 
 You'll find the additional libraries in the libs dir.
 Don't forget to read up on the JavaFX 8 3D chapter.
 
-Now that you're up to speed with it, good luck ;-)
+This software was developed with: JDK 8u91 with NetBeans 8.1
+http://www.oracle.com/technetwork/articles/javase/jdk-netbeans-jsp-142931.html
