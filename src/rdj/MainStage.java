@@ -47,6 +47,7 @@ public class MainStage extends Application
     protected	static Path		    scenefile;
     private	int			    major, minor, update;
     private    	String			    version;
+    private    	String			    product;
     private    	static int		    verbosity = 1;
 
     public void updatePreloaderProgress(double param)
@@ -56,6 +57,7 @@ public class MainStage extends Application
 
     @Override public void init() 
     {
+	product = "GravitySimulator3D";
 	major = 2; minor = 0; update = 0; version = "v" + major + "." + minor + "." + update;
 	notifyPreloader(new ErrorNotification("progress","show",new Throwable("")));
 	notifyPreloader(new ErrorNotification("application","title",new Throwable("GravitySimulator3D " + version)));
@@ -87,7 +89,7 @@ public class MainStage extends Application
 	notifyPreloader(new ErrorNotification("info","GravitySimulator3D",new Throwable("starting...")));
 
 	stage = param;
-	stage.setTitle("GravitySimulator3D");
+	stage.setTitle(product + " " + version);
 	stage.initStyle(StageStyle.UNIFIED);
 	stage.setFullScreenExitKeyCombination(new KeyCodeCombination(KeyCode.ESCAPE, KeyCombination.SHIFT_DOWN));
 	stage.setFullScreenExitHint("<Shift-Esc> exit");
