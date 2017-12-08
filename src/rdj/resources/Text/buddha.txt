@@ -1,7 +1,7 @@
 Use [W] [A] [S] [D] [X] keys to move and mouse (CLICK & ESC) to steer
 Use SPACE to show and hide SceneDisplay (MENU) and NodeDisplay.
 
-Open "readme.scene" for more info on howto use SpaceNavigator.
+Open "readme.scene" for more info on howto use GravitySimulator3D.
 Open SceneDisplay (left side) -> click "Scenes" -> "readme.scenes"
 
 Gautama Buddha (From Wikipedia, the free encyclopedia)

@@ -63,4 +63,4 @@ Further you can create your own scenes in the scenes directory.
 Use the included scenes as an example on howto create scenes.
 Create your scenes in the same directory and they will appear in the scenes list of the SceneDisplay
 
-Any questions regarding SpaceNavigator can be send to: ronuitzaandam@gmail.com
+Any questions regarding GravitySimulator3D can be send to: ronuitzaandam@gmail.com

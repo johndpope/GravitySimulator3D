@@ -1,17 +1,17 @@
-Make sure you have Java 8 (JRE) or higher installed before running: SpaceNavigator.jar
+Make sure you have Java 8 (JRE) or higher installed before running: GravitySimulator3D.jar
 Please visit: http://www.java.com/
 
-After installation double click: SpaceNavigator.jar
+After installation double click: GravitySimulator3D.jar
 
 or start from commandline:
 
 Usage:
 
-java -jar SpaceNavigator.jar
-java -jar SpaceNavigator.jar [filename.scene]
+java -jar GravitySimulator3D.jar
+java -jar GravitySimulator3D.jar [filename.scene]
 
 With memory issues try experimenting with the -X option:
-java -Xmx1024m -jar SpaceNavigator.jar [filename.scene]
+java -Xmx1024m -jar GravitySimulator3D.jar [filename.scene]
 
 ==============================================================================
 
@@ -76,4 +76,4 @@ Use the included filename.scene files as an example on howto create scenes.
 The rdj/scenes/celestials.def are predefines celestials that can be modified
 Create scenes in the "scenes" directory and find them in the ScenesDisplay
 
-Any questions regarding SpaceNavigator can be send to: ronuitzaandam@gmail.com
+Any questions regarding GravitySimulator3D can be send to: ronuitzaandam@gmail.com
